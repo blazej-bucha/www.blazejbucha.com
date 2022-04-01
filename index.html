@@ -1,0 +1,1221 @@
+<html>
+
+<!-- Head -->
+<head>
+<style>
+body {
+    background-color: #171717;
+}
+</style>
+<style>
+a {
+    color: #5dade2;
+}
+</style>
+<style>
+pre {
+    font-family: Monospace;
+    color: #95a5a6;
+    background-color: #171717;
+}
+</style>
+<style type="text/css">
+.custom {
+    font-family: Verdana, sans-serif;
+    color: #eaeded;
+}
+</style>
+<style type="text/css">
+.custom_break {
+    font-family: Verdana, sans-serif;
+    color: #eaeded;
+    word-break: break-all;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+}
+</style>
+<style type="text/css">
+.console {
+	font-family: Monospace;
+    color: #95a5a6;
+    background-color: #212f3d;
+    font-size: 100%;
+    padding: 2px 4px;
+    word-break: break-all;
+}
+</style>
+<style type="text/css">
+.text_highlight {
+    font-family: Monospace;
+    color: #95a5a6;
+    background-color: #212f3d;
+    font-size: 100%;
+    padding: 2px 4px;
+    word-break: break-word;
+}
+</style>
+
+<style>
+body
+{
+    margin:     0 auto;
+    max-width:   700px;
+}
+img {
+  max-width: 100%;
+  height: auto;
+  cursor: pointer;
+}
+.filename {
+  word-break: break-word;
+}
+.desktop-equation {
+  display: initial;
+}
+.mobile-equation {
+  display: none;
+}
+@media (max-width: 700px) {
+  body {
+    margin: 0 15px;
+  }
+  figure {
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+  }
+}
+@media (max-width: 545px) {
+  .desktop-equation {
+    display: none;
+  }
+  .mobile-equation {
+    display: initial;
+  }
+}
+</style>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<meta charset="UTF-8">
+<meta content="Blažej Bucha" name="Author">
+<meta name="keywords" content="GrafLab, isGrafLab, spherical harmonic analysis, ultra-high-degree spherical harmonic analysis, spherical harmonic synthesis, cap-modified spectral gravity forward modelling, Molodensky's truncation coefficients, GOCE-only spherical harmonic gravity field models, divergence effect, divergence of spherical harmonics, Matlab, Blazej Bucha">
+<meta name="description" content="Gravity field modelling: Products and Matlab-based routines from research papers by Blažej Bucha">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<!-- End Head -->
+
+
+<body>
+
+
+
+
+
+
+<!-- Introduction -->
+<h1 class="custom" id="Top">Blažej Bucha</h1>
+<p class="custom">Senior Lecturer at the <a 
+href="https://www.svf.stuba.sk/en/departments/department-of-theoretical-geodesy.html?page_id=3501" 
+target="_blank">Department of Theoretical Geodesy and Geoinformatics</a>, 
+Slovak University of Technology in Bratislava.</p>
+
+<p class="custom">This page offers outputs from some of the research papers 
+that I co-authored, all of them being related to gravity field modelling. The 
+computer codes are written in C, Fortran and/or MATLAB. Anyone is encouraged to 
+tailor the routines as freely as needed.</p>
+
+<p class="custom">In case you have any comments, suggestions, questions or 
+criticism, please feel free to contact me at <a 
+href="mailto:blazej.bucha@stuba.sk" target="_top">blazej.bucha@stuba.sk</a>. If 
+you too prefer secure communication, you may want to sign your email and/or 
+encrypt it with my <a href="gpg/pubkey.asc" target="_blank">public_key</a> 
+using <a href="https://www.gnupg.org" target="_blank">GNU Privacy 
+Guard</a>.</p>
+<br>
+<hr>
+<br>
+<!-- End Introduction -->
+
+
+
+
+
+
+<!-- Content -->
+<h2 class="custom">Contents</h2>
+<ul style="line-height:1.4;">
+  <li class="custom"><a href="#GrafLab">GrafLab</a> &#8212 High-degree surface 
+  and solid spherical harmonic synthesis</li>
+
+  <br>
+
+  <li class="custom"><a href="#isGrafLab">isGrafLab</a> &#8212 High-degree 
+  solid spherical harmonic synthesis at regular grids residing on irregular 
+  surfaces</li> 
+
+  <br>
+
+  <li class="custom"><a href="#GOCE-only_gravity_models">GOCE-only global 
+  gravity field models</a> from the kinematic orbit</li> 
+
+  <br>
+
+  <li class="custom"><a href="#Moon_gravity_models">Divergence-free spherical 
+  harmonic gravity models</a> of the Moon's topographic masses</li> 
+
+  <br>
+
+  <li class="custom"><a href="#SHA">High-degree surface spherical harmonic 
+  analysis/synthesis</a></li>
+
+  <br>
+
+  <li class="custom"><a href="#Truncation_coefficients">Molodensky's truncation 
+  coefficients</a> for cap-modified spectral gravity forward modelling</li>
+
+  <!--
+  <br>
+
+  <li class="custom"><a href="#TView">TView package</a> &#8212 Single, total and cumulative viewshed computations from digital elevation models</li>
+  -->
+  <br>
+
+  <li class="custom"><a href="#SRBF_package">SRBF_package</a> for gravity field 
+  modelling with spherical radial basis functions</li>
+
+  <br>
+
+  <li class="custom"><a href="#GMSQ2019">GMSQ2019</a> &#8212 2 arc-sec 
+  gravimetric quasigeoid of Slovakia</li>
+
+  <br>
+
+  <li class="custom"><a href="#grav-sr-2arcsec">grav-sr-2arcsec</a> &#8212 A suite of 2-arcsec surface gravitational maps of the Slovak Republic up to the full gravitational tensor</li>
+
+  <br>
+
+  <li class="custom"><a href="#GFM_DE_rule">GFM_DE_rule</a> package for 
+  spatial-domain Newtonian integration</li>
+
+  <br>
+
+  <li class="custom"><a href="#Bennu">Asteroid Bennu</a> &#8212 Spherical 
+  harmonic models of Bennu's gravitational field</li>
+
+  <br>
+
+  <li class="custom"><a href="#Publications">Publications</a></li>
+
+  <br>
+
+  <li class="custom"><a href="#Favourite_websites">Favourite websites</a></li>
+
+  <!--
+  <br>
+
+  <li class="custom"><a href="#teaching-with-open-source">A non-scientific 
+  rambling</a> &#8212 Online teaching during the Covid-19 pandemic with open 
+  source software</li>
+  -->
+
+</a></li>
+</ul>
+<br>
+<hr>
+<br>
+<!-- End Content -->
+
+
+
+
+
+
+<!-- GrafLab -->
+<h2 class="custom" id="GrafLab">GrafLab</h2>
+
+<p class="text_highlight"><b>PACKAGE OVERVIEW</b><br>
+----------------<br>
+Name: GrafLab<br>
+Programming Language: MATLAB<br>
+Code version: 2.1.4<br>
+Updated: Mar 24, 2020<br>
+Download: <a href="https://www.svf.stuba.sk/en/departments/department-of-theoretical-geodesy/science-and-research/downloads.html?page_id=4996" target="_blank">https://www.svf.stuba.sk/en/departments/department-of-theoretical-geodesy/science-and-research/downloads.html?page_id=4996</a></p>
+
+<p class="custom">GrafLab (GRAvity Field LABoratory) is a MATLAB-based routine 
+to compute functionals of the geopotential up to high degrees (tens of 
+thousands and beyond).<br></p>
+
+<p class="custom"><b>Features</b>
+<ul>
+  <li class="custom">Evaluates 38 functionals of the geopotential (e.g., the 
+  geoid, height anomaly, gravity anomalies/disturbances, deflections of the 
+  vertical, gravitational tensor).</li>
+
+  <li class="custom">Evaluates the commission error of 26 functionals using 
+  a full variance-covariance matrix of spherical harmonic coefficients.</li>
+
+  <li class="custom">Supports efficient FFT-based synthesis at grids and 
+  point-by-point synthesis at scattered points.</li>
+
+  <li class="custom">Reads models in the <a 
+  href="http://icgem.gfz-potsdam.de/ICGEM-Format-2011.pdf" 
+  target="_blank">gfc</a> format defined by <a 
+  href="http://icgem.gfz-potsdam.de" target="_blank">ICGEM</a>.</li>
+
+  <li class="custom">Works with evaluation points defined by spherical as well 
+  as ellipsoidal coordinates.</li>
+
+  <li class="custom">Plots output data on a map.</li>
+</ul>
+</p>
+
+<p class="custom">A user can interact with GrafLab either through a GUI (the 
+figure below) or from the command line.</p>
+
+<center><figure><img src="img/graflab/gui.png" width="660" 
+height="495"/></figure></center>
+
+<p class="custom">GrafLab was published in
+<br>
+<br>
+Bucha, B., Janák, J., 2013. A MATLAB-based graphical user interface program for
+computing functionals of the geopotential up to ultra-high degrees and orders.
+Computers & Geosciences 56, 186-196, <a href="http://doi.org/10.1016/j.cageo.2013.03.012" target="_blank">http://doi.org/10.1016/j.cageo.2013.03.012</a>.
+</p>
+<p class="custom">Please use this reference in your works when using GrafLab.</p>
+<br>
+
+<p class="custom"><b>Some sample outputs from GrafLab</b></p>
+<ul>
+
+<li class="custom"><p class="custom"><u>Geoid undulations</u>:</p>
+<center><figure><img src="img/graflab/geoid-egm96-dtm2006-to360.png" 
+width="660" height="495"/></figure></center>
+
+<p class="custom">This output can be reproduced with <a 
+href="http://edisk.cvt.stuba.sk/~xbuchab/GrafLab/test_data_GrafLab.zip" 
+target="_blank">test data</a> and the following command:</p>
+
+<p 
+class="console">GrafLab('OK',3986004.415E+8,6378136.3,0,360,1,'EGM96.mat',0,0,-90,0.25,90,0,0.25,360,0,[],[],[],[],'EGM96_Geoid_to360',0,10,1,'DTM2006.mat',0,1,1,2,6,1,60,600,1)</p>
+</li>
+
+<li class="custom"><p class="custom"><u>Planetary topographies</u> (look for 
+the text "Some useful tips and tricks" in the <a 
+href="http://edisk.cvt.stuba.sk/~xbuchab/GrafLab/list_of_changes_in_GrafLab.txt" 
+target="_blank">list_of_changes_in_GrafLab.txt</a> file):</p>
+<center><figure><img src="img/graflab/topography-dtm2006-to360.png" width="660" 
+height="495"/></figure></center>
+<p class="custom">This output can be reproduced using <a 
+href="http://edisk.cvt.stuba.sk/~xbuchab/GrafLab/test_data_GrafLab.zip" 
+target="_blank">test data</a> and running the command:</p>
+<p class="console">GrafLab('OK',1,1,0,360,[0 0 0 0 0],'DTM2006.mat',1,0,-90,0.25,90,0,0.25,360,0,[],[],[],[],'Topography',0,11,1,[],0,1,1,2,6,1,60,600,1)</p>
+</li>
+
+<p class="custom">In fact, this command can perform any surface spherical 
+harmonic synthesis of the form
+<span class="desktop-equation">$$f(\varphi,\lambda) = \sum_{n=0}^{n_{\max}} \sum_{m=0}^{n} \left( \bar{C}_{nm}\, \cos(m\, \lambda) + \bar{S}_{nm}\, \sin(m\, \lambda) \right) \bar{P}_{nm}(\sin\varphi)\,,$$</span>
+<span class="mobile-equation">$$f(\varphi,\lambda) = \sum_{n=0}^{n_{\max}} \sum_{m=0}^{n} \Bigl( \bar{C}_{nm}\, \cos(m\, \lambda)$$</span>
+<span class="mobile-equation">$$ + \bar{S}_{nm}\, \sin(m\, \lambda) \Bigr) \, \bar{P}_{nm}(\sin\varphi)$$</span>
+where $\bar{C}_{nm}$ and $\bar{S}_{nm}$ are $4\pi$-fully-normalized (real) 
+surface spherical harmonic coefficients of the function $f$, $n$ and $m$ are 
+spherical harmonic degree and order, respectively, $\bar{P}_{nm}(\sin\varphi)$ 
+are the $4\pi$-fully-normalized (real) associated Legendre functions of the 
+first-kind, and, finally, $\varphi$ and $\lambda$ are the spherical latitude 
+and longitude, respectively. This means GrafLab can synthesize a wide range of 
+(real) functions given on a sphere up to high harmonic degrees (tens of 
+thousands and beyond).
+</p>
+<li class="custom"><p class="custom"><u>Gravity field of celestial objects</u> 
+(look for the text "Some useful tips and tricks" in the <a 
+href="http://edisk.cvt.stuba.sk/~xbuchab/GrafLab/list_of_changes_in_GrafLab.txt" 
+target="_blank">list_of_changes_in_GrafLab.txt</a> file).  As an example, shown 
+below is the gravitational vector induced by topographic masses of the 
+Moon.</p>
+<center><figure><img src="img/graflab/moon-gx.png" width="660" 
+height="495"/></figure></center>
+<center><figure><img src="img/graflab/moon-gy.png" width="660" 
+height="495"/></figure></center>
+<center><figure><img src="img/graflab/moon-gz.png" width="660" 
+height="495"/></figure></center>
+<p class="custom">The gravitational vector was computed up to degree 2160 at 
+5 arc-min grid from the model <span 
+class="custom_break">"STU_Moon_topography_to720_gravity_to2160.gfc"</span> (see 
+the section on divergence-free gravity models of the Moon's gravity field 
+below) using the command:</p>
+<p class="console">GrafLab('OK',0.4902805823000e+13,0.1737999e+07,0,2160,[0 0 0 0 0],'STU_Moon_topography_to720_gravity_to2160.gfc',1,0,-90,0.08,90,0,0.08,360,11000,[],[],[],[],'Moon_gravitational_vector',0,16,3,[],0,1,1,2,6,1,60,600,1)</p></li>
+</ul>
+<br>
+
+<p class="custom"><b>Computation time</b></p>
+<p class="custom">Below are shown computation times required by GrafLab to 
+synthesize the Earth's topography as represented by <a 
+href="http://ddfe.curtin.edu.au/gravitymodels/Earth2014/data_1min/shcs_to10800/" 
+target="_blank">Earth2014.TBI2014.degree10800</a> up to harmonic degrees nmax 
+= 90, 180, 360, 720, 1080, 2160, 4320, 6480, 8640 and 10800. The position of 
+evaluation points is defined by the Gauss&#8212Legendre quadrature (see Section 
+<a href="#SHA">Ultra-high-degree surface spherical harmonic 
+analysis/synthesis</a></li>). The dimensions of the grids are 
+(nmax+1)*(2*nmax+2) in terms of the latitude and the longitude, respectively, 
+and Legendre's functions were evaluated after <a 
+href="https://link.springer.com/article/10.1007%2Fs00190-011-0519-2" 
+target="_blank">Fukushima (2012)</a>. The tests were conducted on a PC with 
+Intel&#174 Core<sup>TM</sup> i7-6800K CPU. The same grids and PC were used to 
+demonstrate the computational times required by the software package to perform 
+spherical harmonic analysis in Section <a href="#SHA">Ultra-high-degree surface 
+spherical harmonic analysis/synthesis</a></li>, so that the two figures can be 
+mutually compared.</p>
+<center><figure><img src="img/graflab/computation-times.png" width="660" 
+height="495"/></figure></center>
+
+<center><p class="custom"><a href="#Top">Go to top</a></p></center>
+<hr>
+<br>
+<!-- End GrafLab -->
+
+
+
+
+
+
+<!-- isGrafLab -->
+<h2 class="custom" id="isGrafLab">isGrafLab</h2>
+
+<p class="text_highlight"><b>PACKAGE OVERVIEW</b><br>
+----------------<br>
+Name: isGrafLab<br>
+Programming Language: MATLAB<br>
+Code version: 2.1.3<br>
+Updated: Nov 8, 2019<br>
+Download: <a href="https://www.svf.stuba.sk/en/departments/department-of-theoretical-geodesy/science-and-research/downloads.html?page_id=4996" target="_blank">https://www.svf.stuba.sk/en/departments/department-of-theoretical-geodesy/science-and-research/downloads.html?page_id=4996</a></p>
+
+<p class="custom">isGrafLab (Irregular Surface GRAvity Field LABoratory) is 
+a modified version of GrafLab that allows accurate and fast computation of 
+functionals of the geopotential at dense grids residing on irregular surfaces 
+such as the Earth's surface. It employs the efficient lumped coefficients 
+approach for surface spherical harmonic synthesis of the functionals and their 
+radial derivatives at regular surfaces (sphere or ellipsoid of revolution), and 
+the Taylor series expansions to continue the functionals to the irregular 
+surface.</p>
+
+<p class="custom">Further details can be found in the paper:<br>
+<br>
+Bucha, B., Janák, J., 2014. A MATLAB-based graphical user interface program for computing functionals of the geopotential up to ultra-high degrees and orders: Efficient computation at irregular surfaces. Computers & Geosciences 66, 219-227, <a href="http://doi.org/10.1016/j.cageo.2014.02.005" target="_blank">http://doi.org/10.1016/j.cageo.2014.02.005</a>.
+</p>
+<p class="custom">Please use this reference in your works when using isGrafLab.</p>
+<center><p class="custom"><a href="#Top">Go to top</a></p></center>
+<hr>
+<br>
+<!-- End isGrafLab -->
+
+
+
+
+
+
+<!-- GOCE models -->
+<h2 class="custom" id="GOCE-only_gravity_models">GOCE-only global gravity field 
+models from the kinematic orbit</h2>
+
+<p class="custom">The GOCE-only global spherical harmonic gravity field models models developed by <a href="http://doi.org/10.1007/s10712-015-9344-0" target="_blank">Bucha et al. (2015)</a> can be downloaded <a href="goce_gravity_models/STU_GOCE_R1.zip" target="_blank">here</a> (~1.8 MB).
+</p>
+
+<p class="custom">The models were estimated from the kinematic orbit of the 
+GOCE satellite (time period from 01 November 2009 to 11 January 2010 which is 
+equal to the R1 period used by the official ESA's models).  Further details:
+<ul>
+  <li class="custom">the models were originally derived by means of spherical radial basis functions (Shannon SRBF) and were transformed into spherical harmonics after the evaluation; the transformation is exact without any approximations,</li>
+  <li class="custom">the <a href="http://doi.org/10.1016/j.asr.2013.11.031" target="_blank">acceleration approach</a> was used to invert the kinematic orbit into gravity field models,</li>
+  <li class="custom">the problematic near-zonal coefficients (polar gap) are stabilized by prior information obtained from our own low-degree GOCE-only models, so that the final models are still GOCE-only,</li>
+  <li class="custom">the models are estimated up to relatively high harmonic degrees (75, 100, 130) to mitigate the aliasing, but it is not recommended to use them beyond degree, say, 70 due to the adverse signal-to-noise ratio,</li>
+  <li class="custom">the models are provided in the <a href="http://icgem.gfz-potsdam.de/ICGEM-Format-2011.pdf" target="_blank">gfc</a> format as defined by <a href="http://icgem.gfz-potsdam.de" target="_blank">ICGEM</a> (International Centre for Global Earth Models).</li>
+</ul>
+</p>
+
+<p class="custom">The effect caused by the stabilization of the near-zonal 
+coefficients is shown in the figure below (Bucha et al., 2015).</p>
+<center><figure><img src="img/goce-gravity-models/goce-ddv.png" width="630" 
+height="420"/></figure></center>
+
+<p class="custom">When using the models, please use the following reference:<BR>
+<BR>
+Bucha, B., Bezděk, A., Sebera, J., Janák, J., 2015. <i>Global and regional gravity field determination from GOCE kinematic orbit by means of spherical radial basis functions</i>. Surveys in Geophysics 36, 773-801, <a href="http://doi.org/10.1007/s10712-015-9344-0" target="_blank">http://doi.org/10.1007/s10712-015-9344-0</a></p>
+<center><p class="custom"><a href="#Top">Go to top</a></p></center>
+<hr>
+<br>
+<!-- End GOCE models -->
+
+
+
+
+
+
+<!-- Moon models -->
+<h2 class="custom" id="Moon_gravity_models">Divergence-free spherical harmonic 
+gravity models of the Moon's topographic masses</h2>
+
+<p class="custom">These models approximate the gravitational field induced by topographic masses of the Moon and mitigate <a href="https://agupubs.onlinelibrary.wiley.com/doi/full/10.1002/2017JE005298" target="_blank">the divergence effect of spherical harmonics in the vicinity of the Moon's topography</a>. The models rely on the Runge&#8212Krarup theorem and enable generally a more accurate evaluation of gravity field quantities close to the lunar topography as compared to the models from spectral gravity forward modelling. This is because the latter ones may suffer from the divergence effect when evaluating the spherical harmonic series on or below the limit sphere encompassing all the gravitating masses (that is, also on the topography). In the figure below, the two approaches are validated with respect to a third (reference) one (Bucha et al., 2019). The upper map shows the reference signal, the middle one depicts the differences related to the Runge&#8212Krarup solution and the bottom one validates the spectral gravity forward modelling technique; note the different colour bars.</p>
+<center><figure><img src="img/idc/sgfm-idc.png" width="473" 
+height="916"/></figure></center>
+
+<p class="custom">We provide 12 models that approximate the gravity field 
+implied by the lunar topographic masses. The topographic masses are expanded up 
+to degrees 90, 180, 360 and 720, and the maximum degree of the gravity field 
+models varies from 360 up to 2160. All models (~320 MB) are available for 
+download <a href="moon_gravity_models/STU_Moon_gravity_fields.zip" 
+target="_blank">here</a> in the <a 
+href="http://icgem.gfz-potsdam.de/ICGEM-Format-2011.pdf" 
+target="_blank">gfc</a> format as defined by <a 
+href="http://icgem.gfz-potsdam.de" target="_blank">ICGEM</a>. One of the 
+models, "STU_Moon_topography_to720_gravity_to2160", can also be accessed from 
+<a href="http://icgem.gfz-potsdam.de/tom_celestial" target="_blank">ICGEM</a>, 
+where it can be find under a shortened name "STU_MoonTopo720".</p>
+
+<p class="custom">The corresponding models that may suffer from the divergence effect were derived by <a href="https://agupubs.onlinelibrary.wiley.com/doi/full/10.1002/2017JE005298" target="_blank">Hirt and Kuhn (2017)</a> and can be downloaded <a href="http://ddfe.curtin.edu.au/gravitymodels/2017Archive_GFM_Moon/" target="_blank">here</a>, including grids of reference gravity disturbances from spatial-domain Newtonian integration.</p>
+
+<p class="custom">Please use the following reference when using the models in your works:<BR>
+<BR>
+Bucha, B., Hirt, C., Kuhn, M., 2019. Divergence-free spherical harmonic gravity field modelling based on the Runge&#8212Krarup theorem: a case study for the Moon. Journal of Geodesy 93, 489-513, <a href="https://doi.org/10.1007/s00190-018-1177-4" target="_blank">https://doi.org/10.1007/s00190-018-1177-4</a>
+</p>
+<center><p class="custom"><a href="#Top">Go to top</a></p></center>
+<hr>
+<br>
+<!-- End Moon models -->
+
+
+
+
+
+
+<!-- Surface SHA -->
+<h2 class="custom" id="SHA">Ultra-high-degree surface spherical harmonic analysis/synthesis</h2>
+
+<p class="text_highlight"><b>PACKAGE OVERVIEW</b><br>
+----------------<br>
+Name: SHA_SHS<br>
+Programming Languages: C, Fortran, MATLAB<br>
+Code version: 1.5<br>
+Updated: Mar 12, 2021<br>
+Download: <a href="sha_code/SHA_SHS.zip" target="_blank">SHA_SHS.zip</a></p>
+
+<p class="custom">These routines are designed for accurate and fast FFT-based 
+ultra-high-degree (tens of thousands) surface spherical harmonic analysis (SHA) 
+and synthesis (SHS). As their key features, Legendre's functions are evaluated 
+after <a href="https://link.springer.com/article/10.1007%2Fs00190-011-0519-2" 
+target="_blank">Fukushima (2012)</a> and both point and mean values are 
+supported.  The C and Fortran codes support double as well as quadruple 
+precision computations.</p>
+
+<p class="custom">As an example, shown below are accuracy levels achieved with 
+the MATLAB version of the package in a closed-loop test environment, where 
+signals up to degrees 90, 180, 360, 720, 1080, 2160, 4320, 6480, 8640 and 10800 
+were harmonically analysed. The results were obtained by the "Surface_SHA.m" 
+routine (non-parallel computation, point values) and the Earth's topography was 
+used as the input signal (<a 
+href="http://ddfe.curtin.edu.au/gravitymodels/Earth2014/data_1min/shcs_to10800/" 
+target="_blank">Earth2014.TBI2014.degree10800</a>). The first figure shows the 
+reference signal up to degree 10,800 and the second one reveals the accuracy 
+achieved (recovered minus reference coefficients), both in terms of 
+(difference) degree amplitudes (square root of degree variances).</p>
+
+<center><figure><img src="sha_code/SHA_degree_amplitudes.png" width="630" height="420"/></figure></center>
+<center><figure><img src="sha_code/SHA_difference_degree_amplitudes.png" width="630" height="420"/></figure></center>
+
+<p class="custom">The next figure compares computation times of spherical 
+harmonic analysis that were required by the C and MATLAB versions of the 
+package.  In C, the "sh_surf_analysis_point_dp.c" function (double precision) 
+was used with parallelization enabled via OpenMP.  In MATLAB, "Surface_SHA.m" 
+was tested (relies natively on multithreading when operates on large arrays as 
+is typical for MATLAB; parallelization via "spmd" is provided in 
+"Surface_SHA_sliced.m", though it aims at different tasks than tested here).  
+The tests were conducted on a PC with Intel&#174 Core<sup>TM</sup> i7-6800K CPU 
+and 128 GB of RAM (no more than several GBs were needed in this example 
+though).</p>
+<center><figure><img src="sha_code/SHA_CPU_times.png" width="630" height="420"/></figure></center>
+
+<p class="custom">As for Fortran, the code is significantly faster than MATLAB, 
+similarly as the C code.  However, it can be slower than C by a factor of, say, 
+2 or so (depends on various details). As a general conclusion, it is strongly 
+recommended to use the C codes.  Currently, it seems that only the C version 
+will be maintained and upgraded in the future.  In favour of the C and Fortran 
+codes is also the fact that they support working with mean values 
+(block-means).  This feature is not supported in MATLAB and probably will never 
+be added.</p>
+
+<p class="custom">When using the routines, please use the following reference:<BR>
+<BR>
+Bucha, B., Hirt, C., Kuhn, M., 2019. Cap integration in spectral gravity forward modelling up to the full gravity tensor. Journal of Geodesy, <a href="https://doi.org/10.1007/s00190-019-01277-3" target="_blank">https://doi.org/10.1007/s00190-019-01277-3</a>.
+</p>
+<center><p class="custom"><a href="#Top">Go to top</a></p></center>
+<hr>
+<br>
+<!--End Surface SHA-->
+
+
+
+
+
+
+<!-- Truncation coefficients -->
+<h2 class="custom" id="Truncation_coefficients">Molodensky's truncation 
+coefficients for cap-modified spectral gravity forward modelling</h2>
+
+<p class="custom"><a 
+href="https://link.springer.com/article/10.1007/s00190-018-1139-x" 
+target="_blank">Cap-modified spectral gravity forward modelling</a> is 
+a spectral technique to deliver near- and/or far-zone gravity effects implied 
+by topographic masses, the shape of which is given as a surface spherical 
+harmonic series. From the numerical point of view, one of its most difficult 
+parts is the accurate computation of the associated Molodensky's truncation 
+coefficients. This is because this evaluation may necessitate to extend the 
+number of significant digits from 16 (double precision) to, say, 64 or even 
+256. Here, this was achieved using the MATLAB's <a 
+href="https://www.advanpix.com/" target="_blank">ADVANPIX</a> toolbox.</p>
+
+<p class="custom">MATLAB-based routines to compute the truncation coefficients and their radial and horizontal derivatives (require the ADVANPIX toolbox) can be downloaded <a href="truncation_coefficients_code/Qnpkj_code.zip" target="_blank">here</a>.
+</p>
+
+<p class="custom">Some pre-computed ready-to-use values of the near-zone and far-zone truncation coefficients that were computed within the Bucha et al. study (see below) are available <a href="truncation_coefficients_pre-computed_values/Qnpkj_pre-computed_values.zip" target="_blank">here</a> (~2.5 GB). The coefficients are evaluated for
+<ul>
+<li class="custom">the spherical distance of $\psi_0 = 100000\ \mathrm{m}\ /\ 6378137\ \mathrm{m}$ (100 km integration radius from the evaluation point),</li>
+<li class="custom">the reference sphere having the radius $R = 6378137\ \mathrm{m}$,</li>
+<li class="custom">the radius of the evaluation point $r = 6378137\ \mathrm{m} + 7000\ \mathrm{m}$,</li>
+<li class="custom">harmonic degrees $n = 0,\dots,21600$,</li>
+<li class="custom">topography powers $p = 1,\dots,30$,</li>
+<li class="custom">radial derivatives $k = 0,\dots,40$,</li>
+<li class="custom">the first- and second-order horizontal derivatives.</li>
+</ul>
+</p>
+<p class="custom">The coefficients were computed using 256 significant digits, ensuring 24-digit accuracy or better. After the evaluation, the coefficients were converted to double precision with 16 significant digits. Importantly, in some cases, the loss of significance errors may be encountered during the spherical harmonic synthesis when using the coefficients (see the reference below).</p>
+
+
+<p class="custom">Please use the following reference when using either the codes or the coefficients:<BR>
+<BR>
+Bucha, B., Hirt, C., Kuhn, M., 2019. Cap integration in spectral gravity forward modelling up to the full gravity tensor. Journal of Geodesy, <a href="https://doi.org/10.1007/s00190-019-01277-3" target="_blank">https://doi.org/10.1007/s00190-019-01277-3</a>.
+</p>
+<center><p class="custom"><a href="#Top">Go to top</a></p></center>
+<hr>
+<br>
+<!-- End Truncation coefficients -->
+
+
+
+
+
+
+<!-- TView -->
+<!--
+<h2 class="custom" id="TView">TView package &#8212 Single, total and cumulative viewshed computations from digital elevation models</h2>
+
+<p class="custom">Using an input digital elevation model given as a grid (DEM), the <a href="https://www.mathworks.com/matlabcentral/fileexchange/72030-tview-single-total-and-cumulative-viewshed-computation" target="_blank">TView package</a> allows to identify DEM cells that are visible from a user-defined point (single viewshed). Consider, for instance, a hilly area over some part of the Earth's surface. Based on the input DEM, the TView package can tell you which parts of the territory are visible from a particular observation point that can be located, e.g., at a summit or in a valley. The two figures below show a DEM and the computed visibility map (single viewshed).</p>
+
+<center><figure><img src="tview_package/Example_1_DEM.png" width="630" height="420"/></figure></center>
+<center><figure><img src="tview_package/Example_1_Single_Viewshed.png" width="630" height="420"/></figure></center>
+
+<p class="custom">Now imagine you want to find the sweet spot that offers the best view (that is, the location with the largest number of visible DEM cells). This can be done by evaluating the single viewshed for each cell of the DEM, followed by some simple summation scheme (see the reference below). In the figure below, the undulation shows terrain elevations over a small part of Slovakia, while the color says how much of the area can be seen from that particular location. The red color indicates an excelent view and the blue color means poor visibility. The visualization was kindly done by Alexandra Rášová in ArcScene.</p>
+
+<center><figure><img src="tview_package/Total_Viewshed.png" width="630" height="420"/></figure></center>
+
+<p class="custom">The computation of total viewshed is generally a time consuming task. The TView package is therefore parallelized via the "parfor" loop, so that it can be used on HPC clusters to lower computational times. An example of the total viewshed can also be found <a href="http://geoportal.gov.sk/sk/map?permalink=c98b809948605ce45e3cc0758598fb78" target="_blank">here</a> as a web map service. It offers a total viewshed grid over the entire Slovakia that was evaluated from SRTM v4.1 (1 arcsec spatial resolution, roughly equals to ~30 m) with an observation radius of 20 km for each cell. The grid was computed by Alexandra Rášová (Rášová, A., 2017. Substantive visibility analysis in GIS. PhD Thesis, Slovak University of Technology in Bratislava, Slovakia, 83 pp, in Slovak, <a href="https://opac.crzp.sk/?fn=detailBiblioForm&sid=3914A65DCB5999B3FC195DD4793E&seo=CRZP-detail-kniha" target="_blank">Download</a> &#8212 therein, click the "Prehliadať" button).</p>
+
+<p class="custom">The TView package supports the flat-Earth, spherical and ellipsoidal approximations of the Earth's shape. Please use the following reference when using the TView package:<BR>
+<BR>
+Rášová, A., Bucha, B. Large–scale parallel computation of total viewshed in MATLAB. Submitted to Computers and Geosciences.
+</p>
+<center><p class="custom"><a href="#Top">Go to top</a></p></center>
+<hr>
+<br>
+-->
+<!-- End TView -->
+
+
+
+
+
+
+<!-- SRBF package -->
+<h2 class="custom" id="SRBF_package">SRBF_package</h2>
+
+<p class="text_highlight"><b>PACKAGE OVERVIEW</b><br>
+----------------<br>
+Name: SRBF_package<br>
+Programming Languages: Fortran (+ Python wrapper), MATLAB<br>
+Code version: 1.0 for Fortran, 1.1 for MATLAB<br>
+Updated: Feb 26, 2020 for Fortran; Feb 18, 2020 for MATLAB<br>
+Download: <a href="srbf_package/SRBF_package.zip" target="_blank">SRBF_package.zip</a></p>
+
+<p class="custom">SRBF_package is a collection of a few routines for gravity field modelling with band-limited spherical radial basis functions (SRBFs), allowing both analysis and synthesis of the gravitational field. Harmonically analysed can be the gravitational potential (or any other continuous scalar function on a 2D sphere), while synthesis is possible for the gravitational potential, the gravitational vector in LNOF and the gravitational tensor in LNOF. To our knowledge, the equations to synthesize the gravitational tensor are novel and are more efficient than other formulae (e.g., that from Appendix of Bucha et al., 2016). This is because only three radial basis functions are needed to compute six unique elements of the gravitational tensor. This may improve the computational speed, as the evaluation of band-limited spherical radial basis functions (the sum over harmonic degrees) is the most time-consuming part of the synthesis.</p>
+
+<p class="custom">As an example of a band-limited SRBF, the figure below depicts the smoothed Shannon SRBF.</p>
+
+<center><figure><img src="img/srbf-package/smoothed-shannon.png" width="630" height="420"/></figure></center>
+
+<p class="custom">The package is an enhanced version of the MATLAB-based routines used by Bucha et al. (2016). It is available as MATLAB-based functions and Fortran 95 routines accompanied by a Python wrapper. The MATLAB synthesis is parallelized using "parfor" and the Fortran synthesis and analysis are parallelized using OpenMP (the "!$OMP PARALLEL DO" directive). When using the same number of CPUs, the Fortran routines can be up to about 10 times faster than their MATLAB-counterparts. The Python wrapper allows an easy access to the Fortran routines for Python users.</p>
+
+<p class="custom">Attached to the package are also also test data, manuals with a detailed description of the package and scripts with two test computations to verify the correctness of the implementation in MATLAB, Fortran and Python. While the test examples are based on global gravity field modelling for clarity, SRBF_package was developed primarily for regional applications with a residual gravity field. This is because SRBF_package is significantly slower when compared to FFT-based SHS and SHA, both of which are designed for global applications. Although the package was designed mainly for gravity field modelling, other applications are possible. Further details can be found in the attached PDF.</p>
+
+
+
+<p class="custom">Please use the following reference when using SRBF_package:<BR>
+<BR>
+Bucha, B., Janák, J., Papčo, J., Bezděk, A., 2016. High-resolution regional gravity field modelling in a mountainous area from terrestrial gravity data. Geophysical Journal International 207, 949-966, <a href="http://doi.org/10.1093/gji/ggw311" target="_blank">http://doi.org/10.1093/gji/ggw311</a>.
+</p>
+<center><p class="custom"><a href="#Top">Go to top</a></p></center>
+<hr>
+<br>
+<!-- End SRBF package -->
+
+
+
+
+
+
+<!-- GMSQ2019 -->
+<h2 class="custom" id="GMSQ2019">GMSQ2019</h2>
+
+<p class="custom">GMSQ2019 is a Gravimetric Model of the Slovak Quasigeoid at 2 arc-sec spatial resolution. It is developed from a high-resolution regional gravity field model (<a href="http://doi.org/10.1093/gji/ggw311" target="_blank">Bucha et al. 2016</a>), which relies on gravity information from (i) EIGEN-6C4 up to degree 2190 (~9 km resolution), (ii) dense terrestrial gravity data modelled by spherical radial basis functions up to degree 21600 (~30 arc-sec), and (iii) residual terrain modelling (~2 arc-sec).</p>
+
+ <p class="custom">A validation of GMSQ2019 based on 34 high-quality GNSS/levelling data revealed a standard deviation of 1.9 cm. When including reference data of worse quality (but higher quantity, in total 8838), the standard deviation reaches 4.3 cm and a systematic bias of -0.5 m is observed.</p>
+
+ <p class="custom">The development of GMSQ2019 is discussed in detail in a technical report (in Slovak), which is freely available at <a href="https://www.geoportal.sk/files/gz/bucha-et-al-2019-gmsq2019-technicka-sprava.pdf" target="_blank">https://www.geoportal.sk/files/gz/bucha-et-al-2019-gmsq2019-technicka-sprava.pdf</a> (~17 MB). Further technicalities are provided in the <a href="http://doi.org/10.1093/gji/ggw311" target="_blank">Bucha et al. (2016)</a> paper. GMSQ2019 in 6 arc-sec spatial resolution is shown in the figure below (units are metres, figure size is ~2.8 MB). A figure at the original 2 arc-sec resolution is provided in the technical report (Obr. 1).</p>
+
+<center><figure><img src="img/gmsq2019/quasigeoid-low-res.png" width="630" 
+height="420"/></figure></center>
+
+<center><p class="custom"><a href="#Top">Go to top</a></p></center>
+<hr>
+<br>
+<!-- End GMSQ2019 -->
+
+
+
+
+
+
+<!-- grav-sr-2arcsec -->
+<h2 class="custom" id="grav-sr-2arcsec">grav-sr-2arcsec</h2>
+
+<p class="text_highlight"><b>PRODUCT OVERVIEW</b><br>
+----------------<br>
+Name: grav-sr-2arcsec<br>
+Version: 1.0<br>
+Released: Nov 24, 2020<br>
+Download: <a href="https://www.blazejbucha.com/grav-sr-2arcsec/" 
+target="_blank">https://www.blazejbucha.com/grav-sr-2arcsec/</a></p>
+
+<p class="custom">grav-sr-2arcsec is a suite of 2-arcsec surface gravitational maps of the Slovak Republic in terms of
+<ul>
+<li class="custom">the gravitational potential ($V$),</li>
+<li class="custom">the full gravitational vector ($V_x$, $V_y$, $V_z$) in the local north-oriented reference frame (LNOF), and</li>
+<li class="custom">the full gravitational tensor in LNOF ($V_{xx}$, $V_{xy}$, $\dots$, $V_{zz}$).</li>  
+</ul>
+</p>
+
+<p class="custom">Below is shown the $V_{zz}$ element of the gravitational tensor over the High and Low Tatra Mountains, representing the roughest part of Slovakia.</p>
+
+<center><figure><img src="img/grav-sr-2arcsec/vzz-high-and-low-tatras.png" 
+width="630" height="420"/></figure></center>
+
+<p class="custom">The next figure shows the $V_y$ element of the gravitational vector over the more or less same region.</p>
+
+<center><figure><img src="img/grav-sr-2arcsec/vy-high-and-low-tatras.png" 
+width="630" height="420"/></figure></center>
+
+<p class="custom">High-resolution figures of the entire grids can be found for all ten quantities in the "figs" directory at link above (more than 30 MB per figure).</p>
+
+<p class="custom">The suite was computed from a high-resolution gravity field model of Slovakia developed by <a href="http://doi.org/10.1093/gji/ggw311" target="_blank">Bucha et al. (2016)</a>. The maps rely on three sources of gravitational information:
+<ul>
+<li class="custom">the Zero-Tide version of the global geopotential model EIGEN-6C4 (Forste, C. et al., 2014) up to degree 2190 (~5 arcmin resolution, ~9 km),</li>
+<li class="custom">the expansion of the residual gravitational signal up to degree 21600 in terms of spherical radial basis functions (<a href="http://doi.org/10.1093/gji/ggw311" target="_blank">Bucha et al. 2016</a>) (~30 arcsec, ~950 m), and</li>
+<li class="custom">residual terrain modelling (<a href="http://doi.org/10.1093/gji/ggw311" target="_blank">Bucha et al. 2016</a>) (2 arcsec, ~60 m).</li>
+</ul>
+</p>
+
+<p class="custom">An independent validation of grav-sr-2arcsec revealed the 
+standard deviation of 0.789 mGal in terms of the gravity.</p>
+
+<p class="custom">Since the residual terrain modelling technique is based on the constant-mass density assumption, grav-sr-2arcsec must *not* be geophysically interpreted at resolutions higher than ~30 arcsec (~950 m).  This is because this information comes solely from the shape of the topography and a constant mass density, so the effect of anomalous densities is *not* captured beyond the ~30 arcsec resolution.  In the case of the combination "EIGEN-6C4" + "residual terrain modelling" (that is, no spherical radial basis functions), the geophysically relevant information can be found only up to the resolution of EIGEN-6C4, that is, ~9 km.  Nevertheless, the residual terrain modelling grids are still very useful for improving the accuracy with respect to independent ground-truth (e.g., observed terrestrial gravity).</p>
+
+<p class="custom">Unfortunately, due to the license restrictions, the gravitational information captured by spherical radial basis functions is not allowed to be published as user-friendly grids.  The information is, however, provided in terms of expansion coefficients of spherical radial basis functions, so that one can *exactly* reproduce their contribution, avoiding any approximations (attached is an efficient ready-to-use Fortran program that will do the work for you).</p>
+
+<p class="custom">To name a few possible applications:
+<ul>
+<li class="custom">screening observed terrestrial gravity for possible outliers,
+
+<li class="custom">reduction of observed terrestrial gravity from the sensor height down to the ground level,
+
+<li class="custom">computation of gravity anomalies/disturbances, deflections of the vertical, disturbing tensor, etc.,
+
+<li class="custom">geoid/quasigeoid determination,
+
+<li class="custom">accurate reduction of observed horizontal angles to a cartographic projection using deflections of the vertical,
+
+<li class="custom">investigations of the curvature of plumb lines,
+
+<li class="custom">geophysical interpretations,
+
+<li class="custom">educational purposes &#8212 from elementary schools (Kids, 
+what is the gravitational field, anyway?  Do you know how the gravitational 
+field looks like?  By investigating the maps, can you say whether the 
+gravitational field is strong or weak in your town/village?  In which place in 
+Slovakia does the gravitational field pull you downward the most? Etcetera, 
+etcetera, etcetera) to universities,
+
+<li class="custom">and perhaps many more.
+</ul>
+</p>
+
+<p class="custom">If you use the grav-sr-2arcsec suite, I will be happy if you let me know 
+about your application!</p>
+
+<p class="custom">The core data (~6.5 GB) are provided as <a href="https://www.hdfgroup.org/solutions/hdf5/" target="_blank">HDF5</a> data files, which can be read in many commonly used programming languages. Further informations on grav-sr-2arcsec can be found in the attached README.txt file.</p>
+
+<center><p class="custom"><a href="#Top">Go to top</a></p></center>
+<hr>
+<br>
+<!-- End grav-sr-2arcsec -->
+
+
+
+
+
+
+<!-- GFM_DE_rule -->
+<h2 class="custom" id="GFM_DE_rule">GFM_DE_rule package</h2>
+
+<p class="text_highlight"><b>PACKAGE OVERVIEW</b><br>
+----------------<br>
+Name: GFM_DE_rule<br>
+Programming Language: Fortran, MATLAB<br>
+Code version: 1.0<br>
+Updated: Apr 21, 2021<br>
+Download: <a href="gfm_de_rule/GFM_DE_rule.zip" target="_blank">GFM_DE_rule.zip</a>
+</p>
+
+<p class="custom">
+The GFM_DE_rule package computes the gravitational potential of a body, the 
+shape of which is given by a surface spherical harmonic expansion and the 
+density of which is constant. The evaluation points can be located inside the 
+body, on its surface or outside the body.
+</p>
+
+<p class="custom">
+The package builds on the spatial-domain gravity forward modelling technique developed by <a href="https://doi.org/10.3847/1538-3881/aa88b8" target="_blank">Fukushima (2017)</a>. It evaluates the Newton integral in the spatial domain via the double exponential rule. The Fortran routines from that paper are utilized, while several modifications were necessary to fit the goals of the package.
+</p>
+
+<p class="custom">
+The package is written in Fortran and MATLAB. The Fortran version supports computations in double as well as quadruple precision and is generally faster than the MATLAB version.
+</p>
+
+<p class="custom">
+The accuracy of the output potential can reach 14 correct digits in double precision and ~30 digits in quadruple precision. The accuracy level is controlled via a relative tolerance error parameter. The higher the required accuracy, the longer the computation times can be expected. The package was designed mainly for modelling gravitational fields of bodies with shapes expanded to low-degree surface spherical harmonic series.
+</p>
+
+<p class="custom">
+As an example, below are shown respectively degree-15 surface spherical 
+harmonic expansion of shape of the asteroid Bennu (units are metres) and the 
+implied surface gravitational potential ($\mathrm{m}^2 \, \mathrm{s}^{-2}$). At 
+99.4 % of the grid points, the gravitational potential is computed correctly up 
+to the 14th digit. The figures are due to <a 
+href="https://doi.org/10.1007/s00190-021-01493-w" target="_blank">Bucha and 
+Sanso (2021)</a>. The data used to prepare the figures can be found in the <a 
+href="#Bennu" target="_blank">Asteroid (101955) Bennu and its gravitational 
+field</a> section.
+</p>
+
+<center><figure><img src="img/gfm-de-rule/bennu-shape.png" width="630" 
+height="420"/></figure></center>
+
+<center><figure><img src="img/gfm-de-rule/bennu-surface-potential.png" 
+width="630" height="420"/></figure></center>
+
+<center><p class="custom"><a href="#Top">Go to top</a></p></center>
+<hr>
+<br>
+<!-- End GFM_DE_rule -->
+
+
+
+
+
+
+<!-- Bennu -->
+<h2 class="custom" id="Bennu">Asteroid  Bennu and its gravitational field</h2>
+
+<p class="custom">
+In the <a href="https://doi.org/10.1007/s00190-021-01493-w" 
+target="_blank">Bucha and Sanso (2021)</a> study, we investigated three 
+spherical-harmonic-based techniques to deliver external gravitational field 
+models of the asteroid (101955) Bennu within its circumscribing sphere. This 
+region is known to be peculiar for external spherical harmonic expansions, 
+because it may lead to a divergent series. The studied approaches are
+
+<ul>
+<li class="custom">spectral gravity forward modelling via external spherical harmonics,</li>
+<li class="custom">the least-squares estimation from surface gravitational data using external spherical harmonics, and</li>
+<li class="custom">the combination of internal and external series expansions.</li>
+</ul>
+</p>
+
+<p class="custom">
+While the first method diverges beyond any reasonable doubts, we show that the other two methods may ensure relative accuracy from ${\sim}10^{-6}$ to $10^{-8}$ in the vicinity of Bennu. This is possible even with the second method, despite the fact that it relies on a single series of external spherical harmonics. Our main motivation was to study conceptual differences between spherical harmonic coefficients from satellite data (analogy to the first method) and from surface gravitational data (the second method). Such coefficients are available through the popular spherical-harmonic-based models of the Earth's gravitational field and often are combined together. We show that the coefficients from terrestrial data may lead to a divergence effect of partial sums, though excellent accuracy can be achieved when such model is used in full. Under (presently) extreme but realistic conditions, the divergence effect of partial sums may affect many near-surface geoscientific applications, such as the geoid/quasigeoid computation or residual terrain modelling. Below are provided output data from that paper.
+</p>
+
+<br>
+<p class="custom"><b>Surface spherical harmonic coefficients of Bennu's shape</b></p>
+
+<p class="custom">The shape surface spherical harmonic <a 
+href="bennu/bennu-shape-shcs.zip" target="_blank">coefficients</a> of Bennu are 
+provided up to maximum harmonic degree 15 and were computed from a <a 
+href="https://sbn.psi.edu/pds/resource/bennushape.html" 
+target="_blank">polyhedral shape model</a>. The physical model of Bennu was 
+obtained after assigning a single-constant mass density of $\rho = 1260\ 
+\mathrm{kg} \, \mathrm{m}^{-3}$ to this shape. A figure of the synthesized 
+shape of Bennu is provided in the <a href="#GFM_DE_rule">GFM_DE_rule</a> 
+section above. The original polyhedral model is shown below (colour bar in 
+meters, <a href="https://doi.org/10.1007/s00190-021-01493-w" 
+target="_blank">Bucha and Sanso, 2021</a>).
+</p>
+
+<center><figure><img src="img/bennu/bennu-polyhedral-model.png" width="630" 
+height="420"/></figure></center>
+
+<br>
+<p class="custom"><b>Spectral gravity forward modelling using external spherical harmonics</b></p>
+<p class="custom">Using the degree-15 shape expansion of Bennu and assuming a 
+constant-mass density, we computed spherical harmonic <a 
+href="bennu/bennu-spectral-gravity-forward-modelling.zip" 
+target="_blank">coefficients</a> of the external gravitational potential using 
+spectral gravity forward modelling. The maximum degree of the potential 
+coefficients is 225. On a Brillouin sphere, they reproduce the gravitational 
+potential with a 14-digit accuracy or better. However, on/below the sphere of 
+convergence, including the surface of Bennu, the spherical harmonic series 
+diverges and produces grossly invalid results. The figure below shows the 
+standard deviations of the errors of the model as a function of maximum 
+harmonic degree (<a href="https://doi.org/10.1007/s00190-021-01493-w" 
+target="_blank">Bucha and Sanso, 2021</a>).</p>
+
+<center><figure><img src="img/bennu/bennu-sgfm-validation.png" width="630" 
+height="420"/></figure></center>
+
+<br>
+<p class="custom"><b>Least-squares estimation from surface gravitational data using external spherical harmonics</b></p>
+<p class="custom">To allow for an accurate spherical-harmonic-based 
+gravitational field modelling everywhere on and above the surface of Bennu 
+while still relying on external spherical harmonics, we developed <a 
+href="bennu/bennu-least-squares.zip" target="_blank">models</a> using the 
+least-squares estimation from surface gravitational data. These models rely on 
+the Runge&#8212Krarup theorem and provide an $\varepsilon$-accuracy, 
+$\varepsilon > 0$, everywhere on and above Bennu. In our case, they outperform 
+spectral gravity forward modelling on the surface of Bennu by more than 3 
+orders of magnitude (relative accuracy is ${\sim}10^{-6}$; <a 
+href="https://doi.org/10.1007/s00190-021-01493-w" target="_blank">Bucha and 
+Sanso, 2021</a>). The models were estimated up to maximum degrees 0, 5, 10, 
+..., 65.  The figure below validates them on the surface of Bennu; the solid 
+colour lines represent standard deviations of the errors of the least-squares 
+models and the dashed black line represents spectral gravity forward 
+modelling.</p>
+
+<center><figure><img src="img/bennu/bennu-ls-validation.png" width="630" 
+height="420"/></figure></center>
+
+<p class="custom">The computation of the models took 90 CPU years.</p>
+
+<br>
+<p class="custom"><b>Combination of internal and external series expansions</b></p>
+<p class="custom">Finally, spherical harmonic coefficients from the experiments 
+related to the internal and external series expansions can be downloaded <a 
+href="bennu/bennu-internal-external-expansions.zip" 
+target="_blank">here</a>. This method does not suffer from the divergence, but 
+its use on the surface of Bennu is less straightforward as with external 
+spherical harmonics. The figure below (<a 
+href="https://doi.org/10.1007/s00190-021-01493-w" target="_blank">Bucha and 
+Sanso, 2021</a>) shows the accuracy levels achieved with spectral gravity 
+forward modelling (the orange curve), least-squares method (green) and the 
+combination of internal and external series expansions (blue) as a function of 
+harmonic degree.
+</p>
+
+<center><figure><img src="img/bennu/bennu-ie-validation.png" width="630" 
+height="420"/></figure></center>
+
+<br>
+<p class="custom"><b>Reference gravitational data</b></p>
+<p class="custom">Reference gravitational potential (accurate up to the 14th digit) on a Brillouin sphere, a mean sphere and the surface of Bennu is available <a href="bennu/bennu-reference-potential-grids.zip" target="_blank">here</a>. The data were computed using the <a href="#GFM_DE_rule">GFM_DE_rule</a> package. The surface potential is shown in the
+<a href="#GFM_DE_rule">GFM_DE_rule</a> section above.</p>
+
+<center><p class="custom"><a href="#Top">Go to top</a></p></center>
+<hr>
+<br>
+<!-- End Bennu -->
+
+
+
+
+
+
+<!-- Publications -->
+<h2 class="custom" id="Publications">Publications</h2>
+
+<ul>
+<li class="custom">Bucha, B., Rossi, L., Sanso, F., 2021. <i>Error bounds for 
+the spectral approximation of the potential of a homogeneous almost spherical 
+body</i>. Studia Geophysica et Geodaetica, 65, 235-260, <a 
+href="https://link.springer.com/article/10.1007/s11200-021-0730-4" 
+target="_blank">https://link.springer.com/article/10.1007/s11200-021-0730-4</a>, 
+Open Access</li>
+
+<br>
+
+<li class="custom">Bucha, B., Sanso, F., 2021. <i>Gravitational field modelling 
+near irregularly shaped bodies using spherical harmonics: a case study for the 
+asteroid (101955) Bennu</i>. Journal of Geodesy, 95, 56, <a 
+href="https://link.springer.com/article/10.1007/s00190-021-01493-w" 
+target="_blank">https://link.springer.com/article/10.1007/s00190-021-01493-w</a>, 
+free <a href="https://rdcu.be/cjcQs" target="_blank">full-text view-only</a> 
+version available</li>
+
+<br>
+
+<li class="custom">Bucha, B., Kuhn, M., 2020. <i>A numerical study on the integration radius separating convergent and divergent spherical harmonic series of topography-implied gravity</i>. Journal of Geodesy 94, 112, <a href="https://link.springer.com/article/10.1007/s00190-020-01442-z" target="_blank">https://link.springer.com/article/10.1007/s00190-020-01442-z</a>, free <a href="https://rdcu.be/caZq2" target="_blank">full-text view-only</a> version available</li>
+
+<br>
+
+<li class="custom">Bucha, B., Hirt, C., Yang, M., Kuhn, M., Rexer, M., 2019. <i>Residual terrain modelling (RTM) in terms of the cap-modified spectral technique: RTM from a new perspective</i>. Journal of Geodesy 93, 2089-2108, <a href="https://doi.org/10.1007/s00190-019-01303-4" target="_blank">https://doi.org/10.1007/s00190-019-01303-4</a>, free <a href="https://rdcu.be/bSJvi" target="_blank">full-text view-only</a> version available</li>
+
+<br>
+
+<li class="custom">Hirt, C., Bucha, B., Yang, M., Kuhn, M., 2019. <i>A numerical study of residual terrain modelling (RTM) techniques and the harmonic correction using ultra-high-degree spectral gravity modelling</i>. Journal of Geodesy 93, 1469-1486, <a href="https://doi.org/10.1007/s00190-019-01261-x" target="_blank">https://doi.org/10.1007/s00190-019-01261-x</a>, free <a href="https://rdcu.be/bSKuq" target="_blank">full-text view-only</a> version available</li>
+
+<br>
+
+<li class="custom">Bucha, B., Hirt, C., Kuhn, M., 2019. <i>Cap integration in spectral gravity forward modelling up to the full gravity tensor</i>. Journal of Geodesy 93, 1707-1737, <a href="https://doi.org/10.1007/s00190-019-01277-3" target="_blank">https://doi.org/10.1007/s00190-019-01277-3</a>, free <a href="https://rdcu.be/bSKeX" target="_blank">full-text view-only</a> version available</li>
+
+<br>
+
+<li class="custom">Hirt, C., Yang, M., Kuhn, M., Bucha, B., Kurzmann, A., Pail, R., 2019. <i>SRTM2gravity: An Ultrahigh Resolution Global Model of Gravimetric Terrain Corrections</i>. Geophysical Research Letters 46, 4618-4627, <a href="https://doi.org/10.1029/2019GL082521" target="_blank">https://doi.org/10.1029/2019GL082521</a>, free <a href="https://rdcu.be/bSKDq" target="_blank">full-text view-only</a> version available</li>
+
+<br>
+
+<li class="custom">Bucha, B., Hirt, C., Kuhn, M., 2019. <i>Divergence-free spherical harmonic gravity field modelling based on the Runge&#8212Krarup theorem: a case study for the Moon</i>. Journal of Geodesy 93, 489-513, <a href="https://doi.org/10.1007/s00190-018-1177-4" target="_blank">https://doi.org/10.1007/s00190-018-1177-4</a>, free <a href="https://rdcu.be/3ZJR" target="_blank">full-text view-only</a> version available</li>
+
+<br>
+
+<li class="custom">Bucha, B., Hirt, C., Kuhn, M., 2019. <i>Cap integration in spectral gravity forward modelling: near- and far-zone gravity effects via Molodensky's truncation coefficients</i>. Journal of Geodesy 93, 65-83, <a href="https://doi.org/10.1007/s00190-018-1139-x" target="_blank">https://doi.org/10.1007/s00190-018-1139-x</a>, free <a href="https://rdcu.be/KML3" target="_blank">full-text view-only</a> version available</li>
+
+<br>
+
+<li class="custom">Rexer, M., Hirt, C., Bucha, B., Holmes, S., 2018. <i>Solution to the spectral filter problem of residual terrain modelling (RTM)</i>. Journal of Geodesy 92, 675-690, <a href="https://doi.org/10.1007/s00190-017-1086-y" target="_blank">https://doi.org/10.1007/s00190-017-1086-y</a>, free <a href="https://rdcu.be/NZNz" target="_blank">full-text view-only</a> version available</li>
+
+<br>
+
+<li class="custom">Bucha, B., Janák, J., Papčo, J., Bezděk, A., 2016. <i>High-resolution regional gravity field modelling in a mountainous area from terrestrial gravity data</i>. Geophysical Journal International 207, 949-966, <a href="http://doi.org/10.1093/gji/ggw311" target="_blank">http://doi.org/10.1093/gji/ggw311</a></li>
+
+<br>
+
+<li class="custom">Bucha, B., Bezděk, A., Sebera, J., Janák, J., 2015. <i>Global and regional gravity field determination from GOCE kinematic orbit by means of spherical radial basis functions</i>. Surveys in Geophysics 36, 773-801, <a href="http://doi.org/10.1007/s10712-015-9344-0" target="_blank">http://doi.org/10.1007/s10712-015-9344-0</a>, free <a href="https://rdcu.be/bSKe9" target="_blank">full-text view-only</a> version available</li>
+
+<br>
+
+<li class="custom">Bucha, B., Janák, J., 2014. <i>A MATLAB-based graphical user interface program for computing functionals of the geopotential up to ultra-high degrees and orders: Efficient computation at irregular surfaces</i>. Computers & Geosciences 66, 219-227, <a href="http://doi.org/10.1016/j.cageo.2014.02.005" target="_blank">http://doi.org/10.1016/j.cageo.2014.02.005</a></li>
+
+<br>
+
+<li class="custom">Bucha, B., Janák, J., 2013. <i>A MATLAB-based graphical user interface program for computing functionals of the geopotential up to ultra-high degrees and orders</i>. Computers & Geosciences 56, 186-196, <a href="http://doi.org/10.1016/j.cageo.2013.03.012" target="_blank">http://doi.org/10.1016/j.cageo.2013.03.012</a></li>
+</ul>
+
+<br>
+
+<p class="custom">Preprints are available at my <a 
+href="https://www.researchgate.net/profile/Blazej_Bucha" 
+target="_blank">ResearchGate profile</a>. For some of the papers above, free 
+full-text view-only versions are available.
+</p>
+<center><p class="custom"><a href="#Top">Go to top</a></p></center>
+<hr>
+<br>
+<!-- End Publications -->
+
+
+
+
+
+
+<!-- Favourite websites -->
+<h2 class="custom" id="Favourite_websites">Favourite websites</h2>
+<ul>
+<li class="custom"><a href="http://icgem.gfz-potsdam.de/home" target="_blank">http://icgem.gfz-potsdam.de/home</a>&#8212International Centre for Global Earth Models, the website offers a large pallet of spherical harmonic gravity field models of the Earth and of other celestial objects, such as the Earth's Moon, Mars, etc.</li>
+
+<br>
+
+<li class="custom"><a href="http://www.asu.cas.cz/~bezdek/" target="_blank">http://www.asu.cas.cz/~bezdek/</a>&#8212Website of Aleš Bezděk with gravity field models from GPS tracking and a MATLAB script for 3D visualizing geodata on a rotating globe</li>
+
+<br>
+
+<li class="custom"><a href="http://www.kaeg.sk/vyskum/projekty-apvv/apvv-0194-10-bouguer_ng/" target="_blank">http://www.kaeg.sk/vyskum/projekty-apvv/apvv-0194-10-bouguer_ng/</a>&#8212 250 x 250 m grid of complete Bouguer anomaly over Slovak Republic and a program for terrain corrections calculations</li>
+
+<br>
+
+<li class="custom"><a href="http://www.math.sk/gbvp/" target="_blank">http://www.math.sk/gbvp/</a>&#8212 Colleagues from the Department of Mathematics and Descriptive Geometry, STU Bratislava, who work on numerical solutions to geodetic boundary value problems</li>
+
+<br>
+
+<li class="custom"><a href="https://sites.google.com/site/michalsprlak/home" target="_blank">https://sites.google.com/site/michalsprlak/home</a>&#8212Website of Michal Šprlák with software packages for gravity field modelling written in Fortran and C</li>
+
+<br>
+
+<li class="custom"><a href="https://www.researchgate.net/profile/Toshio_Fukushima" target="_blank">https://www.researchgate.net/profile/Toshio_Fukushima</a>&#8212ResearchGate profile of Prof. Toshio Fukushima with dozens of state-of-the-art algorithms for gravity field modelling</li>
+</ul>
+<center><p class="custom"><a href="#Top">Go to top</a></p></center>
+<hr>
+<br>
+<!-- End Favourite websites -->
+
+
+
+
+
+
+<!-- Open Source Teaching -->
+<!--
+<h2 class="custom" id="teaching-with-open-source">A non-scientific rambling 
+  &#8212 Online teaching during the Covid-19 pandemic with open source 
+  software</h2>
+
+<p class="custom">As a university lecturer, I lead seminars on Physical 
+Geodesy.  For the last couple of months, I have been forced, similarly as many 
+other teachers, to move my seminars online.  Here, I would like to share my 
+one-year experience with online teaching and to show what has worked for me the 
+best, hoping there is perhaps someone, who might benefit from this.</p>
+
+<p class="custom">When it comes to online teaching at a public university, the 
+following issues are important for me as a teacher.
+
+<br>
+
+<li class="custom">I want to ensure that students do not need to install any 
+additional software to be able to participate on the seminars.</li>
+
+<br>
+
+<li class="custom">I want to ensure that students do not need create any kind 
+of account at various online services.</li>
+
+<br>
+
+<li class="custom">I want to use only open source software.</li>
+
+<br>
+
+<li class="custom">I want to use only software that is secure, e.g. employs 
+end-to-end encryption.</li>
+</p>
+
+<p class="custom">My seminars are given synchronously, that is, me and my 
+students meet together in real time.  An inevitable part of teaching is a 
+discussion.  To allow for this, I am using <a 
+href="https://jitsi.org/jitsi-meet/" target="_blank">Jitsi Meet</a>, which is a 
+secure, free video conferencing tool.  While Jitsi Meet allows everyone to 
+freely and easily create a <a href="https://meet.jit.si/" target="_blank">video 
+conference</a>, it is more flexible for me to rely on my own server with the 
+Jitsi Meet tool running on it.  This overcomes some of the difficulties that 
+may be associated with third party servers, such as slow internet connection 
+when the traffic on the public servers is high (this may happen, for instance, 
+during a lockdown).  After thinking a while, I found many other essential 
+reasons for not using public servers.  So, for about 15 EUR per year, I bought 
+a domain <a href="https://www.blazejbucha.com" 
+target="_blank">https://www.blazejbucha.com</a>, redirected it to my work PC 
+running on <a href="https://www.debian.org/" target="_blank">Debian</a> and 
+installed Jitsi Meet on it (with a help of my kind colleague).  Now, whenever I 
+need to give a seminar, to have a discussion on a student's work or thesis, or 
+just to meet a student, I simply start the Jitsi Meet server, find some cool 
+name for our meeting, protect the meeting by a password and then we can enjoy 
+all the fascinating issues of Physical Geodesy!  All the student needs is a web 
+browser.  It's secure, it's comfortable and it's fun.  In case you are 
+satisfied with public servers, <a href="https://meet.jit.si/" 
+target="_blank">this</a> works well, too (tested).</p>
+
+<p class="custom">Physical Geodesy is full of nice and cool equations which is 
+exactly why my students love studying it.  But for real-time online teaching, 
+this posses some difficulties, major or minor, depending on the equipment you 
+have at your disposal (e.g., some board, tablet or so).  As I don't like buying 
+new stuff and I need to be flexible (one day I may work from my home, the other 
+day from my office), I have opted for a minimalistic yet powerful (I think) 
+approach.  I decided I'll be writing all the nice equations we need to discuss 
+on a paper; at the same time, using a camera on my smartphone, I will be 
+displaying all the stuff I am doing on the paper on the display of my smart 
+phone; finally, the display of my smart phone will be mirrored to my PC using 
+an USB cable.  This may sound too complicated, but the exact opposite is true 
+in fact!  As a result, I have a window open on my PC that shows all the magical 
+stuff that is happening on the paper, which is then shared via the Jitsi Meet's 
+screen sharing to students. The students are then able to see (in real time) 
+all the equations, listen to my comments, ask questions, etc.  For me, this is 
+much better than having some presentation slides prepared beforehand, because I 
+can now interact with the students, draw some additional sketches based on 
+their questions and so on, similarly as we did back in the times, when we could 
+meet in person.  On my smartphone, I am using the <a 
+href="https://lineageos.org/" target="_blank">LineageOS</a> operating system 
+(not needed though, Android will work fine, too).  To mirror my phone's 
+display, I am using a lightweight application called <a 
+href="https://github.com/Genymobile/scrcpy" target="_blank">scrcpy</a>.  The 
+application is simple and works great for all my needs.  Whenever needed, I 
+have the stream of the phone's camera displayed on the full screen on the PC's 
+monitor.  To ensure smooth and well visible streaming of my handwriting, I put 
+the phone horizontally on an elevated firm support, making sure there is no 
+visual barrier between the paper and the phone's camera.</p>
+
+<p class="custom">For me, this approach works quite well.  I do not need any 
+special equipment, I can easily work both from my home or from my office, all 
+the software is free and open source, students do not need to install any 
+additional software and we can smoothly communicate together.  In fact, I am 
+quite enjoying it!  Should any of this help you, I will be happy if you give me 
+some feedback or perhaps let me know of your own favourite features.</p>
+
+<center><p class="custom"><a href="#Top">Go to top</a></p></center>
+<hr>
+<br>-->
+<!-- End Open Source Teaching -->
+
+
+
+
+
+
+<center>
+<p class="custom">Last modified: <span id="demo"></span>.</p>
+</center>
+
+<script>
+document.getElementById("demo").innerHTML = document.lastModified;
+</script>
+
+<script>
+  function openFullscreen(event) {
+    var elem = event.target;
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+    } else if (elem.mozRequestFullScreen) { /* Firefox */
+      elem.mozRequestFullScreen();
+    } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+      elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) { /* IE/Edge */
+      elem.msRequestFullscreen();
+    }
+  }
+
+  for (image of document.getElementsByTagName('img')) {
+    image.addEventListener('click', openFullscreen)
+  }
+</script>
+
+</body>
+</html>
