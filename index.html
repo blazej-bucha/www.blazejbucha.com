@@ -182,11 +182,6 @@ Guard</a>.</p>
   <li class="custom"><a href="#Truncation_coefficients">Molodensky's truncation 
   coefficients</a> for cap-modified spectral gravity forward modelling</li>
 
-  <!--
-  <br>
-
-  <li class="custom"><a href="#TView">TView package</a> &#8212 Single, total and cumulative viewshed computations from digital elevation models</li>
-  -->
   <br>
 
   <li class="custom"><a href="#SRBF_package">SRBF_package</a> for gravity field 
@@ -606,36 +601,6 @@ Bucha, B., Hirt, C., Kuhn, M., 2019. Cap integration in spectral gravity forward
 <hr>
 <br>
 <!-- End Truncation coefficients -->
-
-
-
-
-
-
-<!-- TView -->
-<!--
-<h2 class="custom" id="TView">TView package &#8212 Single, total and cumulative viewshed computations from digital elevation models</h2>
-
-<p class="custom">Using an input digital elevation model given as a grid (DEM), the <a href="https://www.mathworks.com/matlabcentral/fileexchange/72030-tview-single-total-and-cumulative-viewshed-computation" target="_blank">TView package</a> allows to identify DEM cells that are visible from a user-defined point (single viewshed). Consider, for instance, a hilly area over some part of the Earth's surface. Based on the input DEM, the TView package can tell you which parts of the territory are visible from a particular observation point that can be located, e.g., at a summit or in a valley. The two figures below show a DEM and the computed visibility map (single viewshed).</p>
-
-<center><figure><img src="tview_package/Example_1_DEM.png" width="630" height="420"/></figure></center>
-<center><figure><img src="tview_package/Example_1_Single_Viewshed.png" width="630" height="420"/></figure></center>
-
-<p class="custom">Now imagine you want to find the sweet spot that offers the best view (that is, the location with the largest number of visible DEM cells). This can be done by evaluating the single viewshed for each cell of the DEM, followed by some simple summation scheme (see the reference below). In the figure below, the undulation shows terrain elevations over a small part of Slovakia, while the color says how much of the area can be seen from that particular location. The red color indicates an excelent view and the blue color means poor visibility. The visualization was kindly done by Alexandra Rášová in ArcScene.</p>
-
-<center><figure><img src="tview_package/Total_Viewshed.png" width="630" height="420"/></figure></center>
-
-<p class="custom">The computation of total viewshed is generally a time consuming task. The TView package is therefore parallelized via the "parfor" loop, so that it can be used on HPC clusters to lower computational times. An example of the total viewshed can also be found <a href="http://geoportal.gov.sk/sk/map?permalink=c98b809948605ce45e3cc0758598fb78" target="_blank">here</a> as a web map service. It offers a total viewshed grid over the entire Slovakia that was evaluated from SRTM v4.1 (1 arcsec spatial resolution, roughly equals to ~30 m) with an observation radius of 20 km for each cell. The grid was computed by Alexandra Rášová (Rášová, A., 2017. Substantive visibility analysis in GIS. PhD Thesis, Slovak University of Technology in Bratislava, Slovakia, 83 pp, in Slovak, <a href="https://opac.crzp.sk/?fn=detailBiblioForm&sid=3914A65DCB5999B3FC195DD4793E&seo=CRZP-detail-kniha" target="_blank">Download</a> &#8212 therein, click the "Prehliadať" button).</p>
-
-<p class="custom">The TView package supports the flat-Earth, spherical and ellipsoidal approximations of the Earth's shape. Please use the following reference when using the TView package:<BR>
-<BR>
-Rášová, A., Bucha, B. Large–scale parallel computation of total viewshed in MATLAB. Submitted to Computers and Geosciences.
-</p>
-<center><p class="custom"><a href="#Top">Go to top</a></p></center>
-<hr>
-<br>
--->
-<!-- End TView -->
 
 
 
