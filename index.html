@@ -174,8 +174,8 @@ Guard</a>.</p>
 
   <br>
 
-  <li class="custom"><a href="#SHA">High-degree surface spherical harmonic 
-  analysis/synthesis</a></li>
+  <li class="custom"><a href="#charm">CHarm</a> &#8212 C library for spherical 
+  harmonic analysis and synthesis</li>
 
   <br>
 
@@ -194,7 +194,9 @@ Guard</a>.</p>
 
   <br>
 
-  <li class="custom"><a href="#grav-sr-2arcsec">grav-sr-2arcsec</a> &#8212 A suite of 2-arcsec surface gravitational maps of the Slovak Republic up to the full gravitational tensor</li>
+  <li class="custom"><a href="#grav-sr-2arcsec">grav-sr-2arcsec</a> &#8212 
+  A suite of 2-arcsec surface gravitational maps of the Slovak Republic up to 
+  the full gravitational tensor</li>
 
   <br>
 
@@ -241,7 +243,7 @@ Guard</a>.</p>
 ----------------<br>
 Name: GrafLab<br>
 Programming Language: MATLAB<br>
-Code version: 2.1.4<br>
+Version: 2.1.4<br>
 Updated: Mar 24, 2020<br>
 Download: <a 
     href="https://www.svf.stuba.sk/en/departments/department-of-theoretical-geodesy/science-and-research/downloads.html?page_id=4996" 
@@ -341,17 +343,22 @@ href="https://www.blazejbucha.com/graflab/list_of_changes_in_GrafLab.txt"
 target="_blank">list_of_changes_in_GrafLab.txt</a> file).  As an example, shown 
 below is the gravitational vector induced by topographic masses of the 
 Moon.</p>
+
 <center><figure><img src="img/graflab/moon-gx.png" width="660" 
 height="495"/></figure></center>
+
 <center><figure><img src="img/graflab/moon-gy.png" width="660" 
 height="495"/></figure></center>
+
 <center><figure><img src="img/graflab/moon-gz.png" width="660" 
 height="495"/></figure></center>
+
 <p class="custom">The gravitational vector was computed up to degree 2160 at 
 5 arc-min grid from the model <span 
 class="custom_break">"STU_Moon_topography_to720_gravity_to2160.gfc"</span> (see 
 the section on divergence-free gravity models of the Moon's gravity field 
 below) using the command:</p>
+
 <p class="console">GrafLab('OK',0.4902805823000e+13,0.1737999e+07,0,2160,[0 0 0 0 0],'STU_Moon_topography_to720_gravity_to2160.gfc',1,0,-90,0.08,90,0,0.08,360,11000,[],[],[],[],'Moon_gravitational_vector',0,16,3,[],0,1,1,2,6,1,60,600,1)</p></li>
 </ul>
 <br>
@@ -363,17 +370,17 @@ href="http://ddfe.curtin.edu.au/gravitymodels/Earth2014/data_1min/shcs_to10800/"
 target="_blank">Earth2014.TBI2014.degree10800</a> up to harmonic degrees nmax 
 = 90, 180, 360, 720, 1080, 2160, 4320, 6480, 8640 and 10800. The position of 
 evaluation points is defined by the Gauss&#8212Legendre quadrature (see Section 
-<a href="#SHA">Ultra-high-degree surface spherical harmonic 
-analysis/synthesis</a></li>). The dimensions of the grids are 
+<a href="#charm">CHarm</a></li>). The dimensions of the grids are 
 (nmax+1)*(2*nmax+2) in terms of the latitude and the longitude, respectively, 
 and Legendre's functions were evaluated after <a 
-href="https://link.springer.com/article/10.1007%2Fs00190-011-0519-2" 
-target="_blank">Fukushima (2012)</a>. The tests were conducted on a PC with 
-Intel&#174 Core<sup>TM</sup> i7-6800K CPU. The same grids and PC were used to 
-demonstrate the computational times required by the software package to perform 
-spherical harmonic analysis in Section <a href="#SHA">Ultra-high-degree surface 
-spherical harmonic analysis/synthesis</a></li>, so that the two figures can be 
+   href="https://link.springer.com/article/10.1007%2Fs00190-011-0519-2" 
+   target="_blank">Fukushima (2012)</a>.
+The tests were conducted on a PC with Intel&#174 Core<sup>TM</sup> i7-6800K 
+CPU. The same grids and PC were used to demonstrate the computational times 
+required by the software package to perform spherical harmonic analysis in
+the <a href="#charm">CHarm</a></li> Section, so that the two figures can be 
 mutually compared.</p>
+
 <center><figure><img src="img/graflab/computation-times.png" width="660" 
 height="495"/></figure></center>
 
@@ -394,7 +401,7 @@ height="495"/></figure></center>
 ----------------<br>
 Name: isGrafLab<br>
 Programming Language: MATLAB<br>
-Code version: 2.1.3<br>
+Version: 2.1.3<br>
 Updated: Nov 8, 2019<br>
 Download: <a 
     href="https://www.svf.stuba.sk/en/departments/department-of-theoretical-geodesy/science-and-research/downloads.html?page_id=4996" 
@@ -438,11 +445,29 @@ models from the kinematic orbit</h2>
 GOCE satellite (time period from 01 November 2009 to 11 January 2010 which is 
 equal to the R1 period used by the official ESA's models).  Further details:
 <ul>
-  <li class="custom">the models were originally derived by means of spherical radial basis functions (Shannon SRBF) and were transformed into spherical harmonics after the evaluation; the transformation is exact without any approximations,</li>
-  <li class="custom">the <a href="http://doi.org/10.1016/j.asr.2013.11.031" target="_blank">acceleration approach</a> was used to invert the kinematic orbit into gravity field models,</li>
-  <li class="custom">the problematic near-zonal coefficients (polar gap) are stabilized by prior information obtained from our own low-degree GOCE-only models, so that the final models are still GOCE-only,</li>
-  <li class="custom">the models are estimated up to relatively high harmonic degrees (75, 100, 130) to mitigate the aliasing, but it is not recommended to use them beyond degree, say, 70 due to the adverse signal-to-noise ratio,</li>
-  <li class="custom">the models are provided in the <a href="http://icgem.gfz-potsdam.de/ICGEM-Format-2011.pdf" target="_blank">gfc</a> format as defined by <a href="http://icgem.gfz-potsdam.de" target="_blank">ICGEM</a> (International Centre for Global Earth Models).</li>
+  <li class="custom">the models were originally derived by means of spherical 
+  radial basis functions (Shannon SRBF) and were transformed into spherical 
+  harmonics after the evaluation; the transformation is exact without any 
+  approximations,</li>
+
+  <li class="custom">the <a href="http://doi.org/10.1016/j.asr.2013.11.031" 
+  target="_blank">acceleration approach</a> was used to invert the kinematic 
+  orbit into gravity field models,</li>
+
+  <li class="custom">the problematic near-zonal coefficients (polar gap) are 
+  stabilized by prior information obtained from our own low-degree GOCE-only 
+  models, so that the final models are still GOCE-only,</li>
+
+  <li class="custom">the models are estimated up to relatively high harmonic 
+  degrees (75, 100, 130) to mitigate the aliasing, but it is not recommended to 
+  use them beyond degree, say, 70 due to the adverse signal-to-noise 
+  ratio,</li>
+
+  <li class="custom">the models are provided in the <a 
+href="http://icgem.gfz-potsdam.de/ICGEM-Format-2011.pdf" 
+target="_blank">gfc</a> format as defined by <a 
+      href="http://icgem.gfz-potsdam.de" target="_blank">ICGEM</a> 
+      (International Centre for Global Earth Models).</li>
 </ul>
 </p>
 
@@ -501,69 +526,74 @@ Bucha, B., Hirt, C., Kuhn, M., 2019. Divergence-free spherical harmonic gravity 
 
 
 
-<!-- Surface SHA -->
-<h2 class="custom" id="SHA">Ultra-high-degree surface spherical harmonic analysis/synthesis</h2>
+<!-- Surface CHarm -->
+<h2 class="custom" id="charm">CHarm &#8212 C library for spherical harmonic 
+    analysis and synthesis</h2>
 
 <p class="text_highlight"><b>PACKAGE OVERVIEW</b><br>
 ----------------<br>
-Name: SHA_SHS<br>
-Programming Languages: C, Fortran, MATLAB<br>
-Code version: 1.5<br>
-Updated: Mar 12, 2021<br>
-Download: <a href="sha_code/SHA_SHS.zip" target="_blank">SHA_SHS.zip</a></p>
+Name: CHarm<br>
+Programming Language: C<br>
+Source Code: <a href="https://github.com/blazej-bucha/charm" 
+target="_blank">https://github.com/blazej-bucha/charm</a><br>
+Documentation: <a href="https://blazej-bucha.github.io/charm/index.html" 
+target="_blank">https://blazej-bucha.github.io/charm/index.html</a></p>
 
-<p class="custom">These routines are designed for accurate and fast FFT-based 
-ultra-high-degree (tens of thousands) surface spherical harmonic analysis (SHA) 
-and synthesis (SHS). As their key features, Legendre's functions are evaluated 
-after <a href="https://link.springer.com/article/10.1007%2Fs00190-011-0519-2" 
-target="_blank">Fukushima (2012)</a> and both point and mean values are 
-supported.  The C and Fortran codes support double as well as quadruple 
-precision computations.</p>
+<p class="custom">CHarm is a C library to work with spherical harmonics up to 
+almost arbitrarily high degrees.</p>
 
-<p class="custom">As an example, shown below are accuracy levels achieved with 
-the MATLAB version of the package in a closed-loop test environment, where 
-signals up to degrees 90, 180, 360, 720, 1080, 2160, 4320, 6480, 8640 and 10800 
-were harmonically analysed. The results were obtained by the "Surface_SHA.m" 
-routine (non-parallel computation, point values) and the Earth's topography was 
-used as the input signal (<a 
-href="http://ddfe.curtin.edu.au/gravitymodels/Earth2014/data_1min/shcs_to10800/" 
-target="_blank">Earth2014.TBI2014.degree10800</a>). The first figure shows the 
-reference signal up to degree 10,800 and the second one reveals the accuracy 
-achieved (recovered minus reference coefficients), both in terms of 
-(difference) degree amplitudes (square root of degree variances).</p>
+<p class="custom"><b>Features</b>
 
-<center><figure><img src="sha_code/SHA_degree_amplitudes.png" width="630" height="420"/></figure></center>
-<center><figure><img src="sha_code/SHA_difference_degree_amplitudes.png" width="630" height="420"/></figure></center>
+<ul>
+  <li class="custom">Supports real-valued fully-normalized surface and solid 
+      spherical harmonics (the geodetic norm).</li>
 
-<p class="custom">The next figure compares computation times of spherical 
-harmonic analysis that were required by the C and MATLAB versions of the 
-package.  In C, the "sh_surf_analysis_point_dp.c" function (double precision) 
-was used with parallelization enabled via OpenMP.  In MATLAB, "Surface_SHA.m" 
-was tested (relies natively on multithreading when operates on large arrays as 
-is typical for MATLAB; parallelization via "spmd" is provided in 
-"Surface_SHA_sliced.m", though it aims at different tasks than tested here).  
-The tests were conducted on a PC with Intel&#174 Core<sup>TM</sup> i7-6800K CPU 
-and 128 GB of RAM (no more than several GBs were needed in this example 
-though).</p>
-<center><figure><img src="sha_code/SHA_CPU_times.png" width="630" height="420"/></figure></center>
+  <li class="custom">Performs FFT-based surface spherical harmonic analysis and 
+      solid spherical harmonic synthesis with minimized memory 
+      requirements.</li>
 
-<p class="custom">As for Fortran, the code is significantly faster than MATLAB, 
-similarly as the C code.  However, it can be slower than C by a factor of, say, 
-2 or so (depends on various details). As a general conclusion, it is strongly 
-recommended to use the C codes.  Currently, it seems that only the C version 
-will be maintained and upgraded in the future.  In favour of the C and Fortran 
-codes is also the fact that they support working with mean values 
-(block-means).  This feature is not supported in MATLAB and probably will never 
-be added.</p>
+  <li class="custom">Stable up to high degrees and orders (tens of thousands 
+      and beyond).</li>
 
-<p class="custom">When using the routines, please use the following reference:<BR>
-<BR>
-Bucha, B., Hirt, C., Kuhn, M., 2019. Cap integration in spectral gravity forward modelling up to the full gravity tensor. Journal of Geodesy, <a href="https://doi.org/10.1007/s00190-019-01277-3" target="_blank">https://doi.org/10.1007/s00190-019-01277-3</a>.
-</p>
+  <li class="custom">Available in single, double and quadruple precision.</li>
+
+  <li class="custom">Supports point and mean data values (both analysis and 
+      synthesis).</li>
+
+  <li class="custom">Supports synthesis at grids and at scattered points/cells.  
+      Synthesis at grids is done by efficient FFT-based algorithms if possible.  
+      For grids, where FFT cannot be used, applied are the Chebyshev 
+      recurrences along the latitude parallels.</li>
+
+  <li class="custom">Supports the Gauss--Legendre and Driscoll--Healy 
+      quadratures.</li>
+
+  <li class="custom">Integrates solid spherical harmonic expansions (e.g., of 
+      the gravitational potential) on band-limited irregular surfaces (e.g., on 
+      the Earth's surface).  This routine is unique to CHarm and cannot be find 
+      in any other publicly available library.</li>
+
+  <li class="custom">Computes Fourier coefficients of fully-normalized 
+      associated Legendre functions of the first kind up to high harmonic 
+      degrees.</li>
+
+  <li class="custom">Performs discrete FFT by <a href="http://fftw.org/" 
+      target="_blank">FFTW</a>.</li>
+
+  <li class="custom">Supports <a href="https://www.openmp.org/" 
+      target="_blank">OpenMP</a> parallelization for
+      shared-memory architectures.</li>
+</ul>
+
+<p class="custom">The predecessor of CHarm, the SHA_SHS package written in C, 
+Fortran and MATLAB, is archived
+<a href="sha_code/SHA_SHS.zip" target="_blank">here</a>.  The package works 
+correctly, has its own brief documentation, but is no longer maintained.</p>
+
 <center><p class="custom"><a href="#Top">Go to top</a></p></center>
 <hr>
 <br>
-<!--End Surface SHA-->
+<!--End Surface CHarm-->
 
 
 
@@ -624,7 +654,7 @@ Bucha, B., Hirt, C., Kuhn, M., 2019. Cap integration in spectral gravity forward
 ----------------<br>
 Name: SRBF_package<br>
 Programming Languages: Fortran (+ Python wrapper), MATLAB<br>
-Code version: 1.0 for Fortran, 1.1 for MATLAB<br>
+Version: 1.0 for Fortran, 1.1 for MATLAB<br>
 Updated: Feb 26, 2020 for Fortran; Feb 18, 2020 for MATLAB<br>
 Download: <a href="srbf_package/SRBF_package.zip" target="_blank">SRBF_package.zip</a></p>
 
@@ -771,7 +801,7 @@ about your application!</p>
 ----------------<br>
 Name: GFM_DE_rule<br>
 Programming Language: Fortran, MATLAB<br>
-Code version: 1.0<br>
+Version: 1.0<br>
 Updated: Apr 21, 2021<br>
 Download: <a href="gfm_de_rule/GFM_DE_rule.zip" target="_blank">GFM_DE_rule.zip</a>
 </p>
