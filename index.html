@@ -175,7 +175,7 @@ Guard</a>.</p>
   <br>
 
   <li class="custom"><a href="#charm">CHarm</a> &#8212 C library for spherical 
-  harmonic analysis and synthesis</li>
+  harmonic transforms</li>
 
   <br>
 
@@ -369,17 +369,13 @@ synthesize the Earth's topography as represented by <a
 href="http://ddfe.curtin.edu.au/gravitymodels/Earth2014/data_1min/shcs_to10800/" 
 target="_blank">Earth2014.TBI2014.degree10800</a> up to harmonic degrees nmax 
 = 90, 180, 360, 720, 1080, 2160, 4320, 6480, 8640 and 10800. The position of 
-evaluation points is defined by the Gauss&#8212Legendre quadrature (see Section 
-<a href="#charm">CHarm</a></li>). The dimensions of the grids are 
-(nmax+1)*(2*nmax+2) in terms of the latitude and the longitude, respectively, 
-and Legendre's functions were evaluated after <a 
-   href="https://link.springer.com/article/10.1007%2Fs00190-011-0519-2" 
-   target="_blank">Fukushima (2012)</a>.
+evaluation points is defined by the Gauss&#8212Legendre quadrature. The 
+dimensions of the grids are (nmax+1)*(2*nmax+2) in terms of the latitude and 
+the longitude, respectively, and Legendre's functions were evaluated after <a 
+    href="https://link.springer.com/article/10.1007%2Fs00190-011-0519-2" 
+    target="_blank">Fukushima (2012)</a>.
 The tests were conducted on a PC with Intel&#174 Core<sup>TM</sup> i7-6800K 
-CPU. The same grids and PC were used to demonstrate the computational times 
-required by the software package to perform spherical harmonic analysis in
-the <a href="#charm">CHarm</a></li> Section, so that the two figures can be 
-mutually compared.</p>
+CPU.</p>
 
 <center><figure><img src="img/graflab/computation-times.png" width="660" 
 height="495"/></figure></center>
@@ -528,7 +524,7 @@ Bucha, B., Hirt, C., Kuhn, M., 2019. Divergence-free spherical harmonic gravity 
 
 <!-- Surface CHarm -->
 <h2 class="custom" id="charm">CHarm &#8212 C library for spherical harmonic 
-    analysis and synthesis</h2>
+    transforms</h2>
 
 <p class="text_highlight"><b>PACKAGE OVERVIEW</b><br>
 ----------------<br>
