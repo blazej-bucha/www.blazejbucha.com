@@ -244,9 +244,10 @@ Guard</a>.</p>
 <!-- GrafLab -->
 <h2 class="custom" id="GrafLab">GrafLab</h2>
 
-<p class="text_highlight"><b>PACKAGE OVERVIEW</b><br>
-----------------<br>
+<p class="text_highlight"><b>OVERVIEW</b><br>
+--------<br>
 Name: GrafLab<br>
+Description: Package for high-degree spherical harmonic synthesis<br>
 Programming Language: MATLAB<br>
 Version: 2.1.4<br>
 Updated: Mar 24, 2020<br>
@@ -398,9 +399,11 @@ height="495"/></figure></center>
 <!-- isGrafLab -->
 <h2 class="custom" id="isGrafLab">isGrafLab</h2>
 
-<p class="text_highlight"><b>PACKAGE OVERVIEW</b><br>
-----------------<br>
+<p class="text_highlight"><b>OVERVIEW</b><br>
+--------<br>
 Name: isGrafLab<br>
+Description: Package for efficient high-degree spherical harmonic synthesis on 
+irregular surfaces<br>
 Programming Language: MATLAB<br>
 Version: 2.1.3<br>
 Updated: Nov 8, 2019<br>
@@ -531,9 +534,10 @@ Bucha, B., Hirt, C., Kuhn, M., 2019. Divergence-free spherical harmonic gravity 
 <h2 class="custom" id="charm">CHarm &#8212 C library for spherical harmonic 
     transforms</h2>
 
-<p class="text_highlight"><b>PACKAGE OVERVIEW</b><br>
-----------------<br>
+<p class="text_highlight"><b>OVERVIEW</b><br>
+--------<br>
 Name: CHarm<br>
+Description: C library for high-degree spherical harmonic transforms<br>
 Programming Language: C<br>
 Source Code: <a href="https://github.com/blazej-bucha/charm" 
 target="_blank">https://github.com/blazej-bucha/charm</a><br>
@@ -651,9 +655,11 @@ Bucha, B., Hirt, C., Kuhn, M., 2019. Cap integration in spectral gravity forward
 <!-- SRBF package -->
 <h2 class="custom" id="SRBF_package">SRBF_package</h2>
 
-<p class="text_highlight"><b>PACKAGE OVERVIEW</b><br>
-----------------<br>
+<p class="text_highlight"><b>OVERVIEW</b><br>
+--------<br>
 Name: SRBF_package<br>
+Description: Routines for gravity field modelling with spherical radial basis 
+functions<br>
 Programming Languages: Fortran (+ Python wrapper), MATLAB<br>
 Version: 1.0 for Fortran, 1.1 for MATLAB<br>
 Updated: Feb 26, 2020 for Fortran; Feb 18, 2020 for MATLAB<br>
@@ -710,9 +716,10 @@ height="420"/></figure></center>
 <!-- grav-sr-2arcsec -->
 <h2 class="custom" id="grav-sr-2arcsec">grav-sr-2arcsec</h2>
 
-<p class="text_highlight"><b>PRODUCT OVERVIEW</b><br>
-----------------<br>
+<p class="text_highlight"><b>OVERVIEW</b><br>
+--------<br>
 Name: grav-sr-2arcsec<br>
+Description: 2-arcsec surface gravitational maps of the Slovak Republic<br>
 Version: 1.0<br>
 Released: Nov 24, 2020<br>
 Download: <a href="https://www.blazejbucha.com/grav-sr-2arcsec/" 
@@ -798,9 +805,10 @@ about your application!</p>
 <!-- GFM_DE_rule -->
 <h2 class="custom" id="GFM_DE_rule">GFM_DE_rule package</h2>
 
-<p class="text_highlight"><b>PACKAGE OVERVIEW</b><br>
-----------------<br>
+<p class="text_highlight"><b>OVERVIEW</b><br>
+--------<br>
 Name: GFM_DE_rule<br>
+Description: Spatial-domain gravity forward modelling<br>
 Programming Language: Fortran, MATLAB<br>
 Version: 1.0<br>
 Updated: Apr 21, 2021<br>
@@ -857,13 +865,22 @@ width="630" height="420"/></figure></center>
 <!-- Bennu -->
 <h2 class="custom" id="Bennu">Asteroid  Bennu and its gravitational field</h2>
 
+<p class="text_highlight"><b>OVERVIEW</b><br>
+--------<br>
+Description: Dataset from the <a 
+href="https://doi.org/10.1007/s00190-021-01493-w" target="_blank">Bucha and 
+Sanso (2021)</a> study<br>
+Dataset Download: <a href="https://doi.org/10.5281/zenodo.6622624" 
+target="_blank">https://doi.org/10.5281/zenodo.6622624</a>
+</p>
+
 <p class="custom">
-In the <a href="https://doi.org/10.1007/s00190-021-01493-w" 
-target="_blank">Bucha and Sanso (2021)</a> study, we investigated three 
-spherical-harmonic-based techniques to deliver external gravitational field 
-models of the asteroid (101955) Bennu within its circumscribing sphere. This 
-region is known to be peculiar for external spherical harmonic expansions, 
-because it may lead to a divergent series. The studied approaches are
+In <a href="https://doi.org/10.1007/s00190-021-01493-w" target="_blank">Bucha 
+and Sanso (2021)</a>, we investigated three spherical-harmonic-based techniques 
+to deliver external gravitational field models of the asteroid (101955) Bennu 
+within its circumscribing sphere. This region is known to be peculiar for 
+external spherical harmonic expansions, because it may lead to a divergent 
+series. The studied approaches are
 
 <ul>
 <li class="custom">spectral gravity forward modelling via external spherical harmonics,</li>
@@ -873,23 +890,39 @@ because it may lead to a divergent series. The studied approaches are
 </p>
 
 <p class="custom">
-While the first method diverges beyond any reasonable doubts, we show that the other two methods may ensure relative accuracy from ${\sim}10^{-6}$ to $10^{-8}$ in the vicinity of Bennu. This is possible even with the second method, despite the fact that it relies on a single series of external spherical harmonics. Our main motivation was to study conceptual differences between spherical harmonic coefficients from satellite data (analogy to the first method) and from surface gravitational data (the second method). Such coefficients are available through the popular spherical-harmonic-based models of the Earth's gravitational field and often are combined together. We show that the coefficients from terrestrial data may lead to a divergence effect of partial sums, though excellent accuracy can be achieved when such model is used in full. Under (presently) extreme but realistic conditions, the divergence effect of partial sums may affect many near-surface geoscientific applications, such as the geoid/quasigeoid computation or residual terrain modelling. Below are provided output data from that paper.
+While the first method diverges beyond any reasonable doubts, we show that the 
+other two methods may ensure relative accuracy from ${\sim}10^{-6}$ to 
+$10^{-8}$ in the vicinity of Bennu. This is possible even with the second 
+method, despite the fact that it relies on a single series of external 
+spherical harmonics. Our main motivation was to study conceptual differences 
+between spherical harmonic coefficients from satellite data (analogy to the 
+first method) and from surface gravitational data (the second method). Such 
+coefficients are available through the popular spherical-harmonic-based models 
+of the Earth's gravitational field and often are combined together. We show 
+that the coefficients from terrestrial data may lead to a divergence effect of 
+partial sums, though excellent accuracy can be achieved when such model is used 
+in full. Under (presently) extreme but realistic conditions, the divergence 
+effect of partial sums may affect many near-surface geoscientific applications, 
+such as the geoid/quasigeoid computation or residual terrain modelling.
 </p>
+
+<p class="custom">
+The dataset is available at the link above.  Next follows a brief 
+description.</p>
 
 <br>
 <p class="custom"><b>Surface spherical harmonic coefficients of Bennu's shape</b></p>
 
-<p class="custom">The shape surface spherical harmonic <a 
-href="bennu/bennu-shape-shcs.zip" target="_blank">coefficients</a> of Bennu are 
-provided up to maximum harmonic degree 15 and were computed from a <a 
-href="https://sbn.psi.edu/pds/resource/bennushape.html" 
-target="_blank">polyhedral shape model</a>. The physical model of Bennu was 
-obtained after assigning a single-constant mass density of $\rho = 1260\ 
-\mathrm{kg} \, \mathrm{m}^{-3}$ to this shape. A figure of the synthesized 
-shape of Bennu is provided in the <a href="#GFM_DE_rule">GFM_DE_rule</a> 
-section above. The original polyhedral model is shown below (colour bar in 
-meters, <a href="https://doi.org/10.1007/s00190-021-01493-w" 
-target="_blank">Bucha and Sanso, 2021</a>).
+<p class="custom">The shape surface spherical harmonic coefficients of Bennu 
+are provided up to maximum harmonic degree 15 and were computed from a <a 
+   href="https://sbn.psi.edu/pds/resource/bennushape.html" 
+   target="_blank">polyhedral shape model</a>. The physical model of Bennu was 
+   obtained after assigning a single-constant mass density of $\rho = 1260\ 
+   \mathrm{kg} \, \mathrm{m}^{-3}$ to this shape. A figure of the synthesized 
+   shape of Bennu is provided in the <a href="#GFM_DE_rule">GFM_DE_rule</a> 
+   section above. The original polyhedral model is shown below (colour bar in 
+   meters, <a href="https://doi.org/10.1007/s00190-021-01493-w" 
+              target="_blank">Bucha and Sanso, 2021</a>).
 </p>
 
 <center><figure><img src="img/bennu/bennu-polyhedral-model.png" width="630" 
@@ -897,18 +930,17 @@ height="420"/></figure></center>
 
 <br>
 <p class="custom"><b>Spectral gravity forward modelling using external spherical harmonics</b></p>
-<p class="custom">Using the degree-15 shape expansion of Bennu and assuming a 
-constant-mass density, we computed spherical harmonic <a 
-href="bennu/bennu-spectral-gravity-forward-modelling.zip" 
-target="_blank">coefficients</a> of the external gravitational potential using 
-spectral gravity forward modelling. The maximum degree of the potential 
-coefficients is 225. On a Brillouin sphere, they reproduce the gravitational 
-potential with a 14-digit accuracy or better. However, on/below the sphere of 
-convergence, including the surface of Bennu, the spherical harmonic series 
-diverges and produces grossly invalid results. The figure below shows the 
-standard deviations of the errors of the model as a function of maximum 
-harmonic degree (<a href="https://doi.org/10.1007/s00190-021-01493-w" 
-target="_blank">Bucha and Sanso, 2021</a>).</p>
+<p class="custom">Using the degree-15 shape expansion of Bennu and assuming 
+a constant-mass density, we computed spherical harmonic coefficients of the 
+external gravitational potential using spectral gravity forward modelling. The 
+maximum degree of the potential coefficients is 225. On a Brillouin sphere, 
+they reproduce the gravitational potential with a 14-digit accuracy or 
+better. However, on/below the sphere of convergence, including the surface of 
+Bennu, the spherical harmonic series diverges and produces grossly invalid 
+results. The figure below shows the standard deviations of the errors of the 
+model as a function of maximum harmonic degree (<a 
+   href="https://doi.org/10.1007/s00190-021-01493-w" target="_blank">Bucha and 
+   Sanso, 2021</a>).</p>
 
 <center><figure><img src="img/bennu/bennu-sgfm-validation.png" width="630" 
 height="420"/></figure></center>
@@ -917,19 +949,18 @@ height="420"/></figure></center>
 <p class="custom"><b>Least-squares estimation from surface gravitational data using external spherical harmonics</b></p>
 <p class="custom">To allow for an accurate spherical-harmonic-based 
 gravitational field modelling everywhere on and above the surface of Bennu 
-while still relying on external spherical harmonics, we developed <a 
-href="bennu/bennu-least-squares.zip" target="_blank">models</a> using the 
-least-squares estimation from surface gravitational data. These models rely on 
-the Runge&#8212Krarup theorem and provide an $\varepsilon$-accuracy, 
+while still relying on external spherical harmonics, we developed models from 
+surface gravitational data using the least-squares estimation. These models 
+rely on the Runge&#8212Krarup theorem and provide an $\varepsilon$-accuracy, 
 $\varepsilon > 0$, everywhere on and above Bennu. In our case, they outperform 
-spectral gravity forward modelling on the surface of Bennu by more than 3 
-orders of magnitude (relative accuracy is ${\sim}10^{-6}$; <a 
-href="https://doi.org/10.1007/s00190-021-01493-w" target="_blank">Bucha and 
-Sanso, 2021</a>). The models were estimated up to maximum degrees 0, 5, 10, 
-..., 65.  The figure below validates them on the surface of Bennu; the solid 
-colour lines represent standard deviations of the errors of the least-squares 
-models and the dashed black line represents spectral gravity forward 
-modelling.</p>
+    spectral gravity forward modelling on the surface of Bennu by more than 
+    3 orders of magnitude (relative accuracy is ${\sim}10^{-6}$; <a 
+   href="https://doi.org/10.1007/s00190-021-01493-w" target="_blank">Bucha and 
+   Sanso, 2021</a>). The models were estimated up to maximum degrees 0, 5, 10, 
+   ..., 65.  The figure below validates them on the surface of Bennu; the solid 
+   colour lines represent standard deviations of the errors of the 
+   least-squares models and the dashed black line represents spectral gravity 
+   forward modelling.</p>
 
 <center><figure><img src="img/bennu/bennu-ls-validation.png" width="630" 
 height="420"/></figure></center>
@@ -938,17 +969,15 @@ height="420"/></figure></center>
 
 <br>
 <p class="custom"><b>Combination of internal and external series expansions</b></p>
-<p class="custom">Finally, spherical harmonic coefficients from the experiments 
-related to the internal and external series expansions can be downloaded <a 
-href="bennu/bennu-internal-external-expansions.zip" 
-target="_blank">here</a>. This method does not suffer from the divergence, but 
-its use on the surface of Bennu is less straightforward as with external 
-spherical harmonics. The figure below (<a 
-href="https://doi.org/10.1007/s00190-021-01493-w" target="_blank">Bucha and 
-Sanso, 2021</a>) shows the accuracy levels achieved with spectral gravity 
-forward modelling (the orange curve), least-squares method (green) and the 
-combination of internal and external series expansions (blue) as a function of 
-harmonic degree.
+<p class="custom">Finally, spherical harmonic coefficients of the internal and 
+external series expansions were computed. They do not suffer from the 
+divergence, but their usage on the surface of Bennu is less straightforward as 
+with external spherical harmonics. The figure below (<a 
+   href="https://doi.org/10.1007/s00190-021-01493-w" target="_blank">Bucha and 
+   Sanso, 2021</a>) shows the accuracy levels achieved with spectral gravity 
+   forward modelling (the orange curve), least-squares method (green) and the 
+   combination of internal and external series expansions (blue) as a function 
+   of harmonic degree.
 </p>
 
 <center><figure><img src="img/bennu/bennu-ie-validation.png" width="630" 
@@ -956,7 +985,11 @@ height="420"/></figure></center>
 
 <br>
 <p class="custom"><b>Reference gravitational data</b></p>
-<p class="custom">Reference gravitational potential (accurate up to the 14th digit) on a Brillouin sphere, a mean sphere and the surface of Bennu is available <a href="bennu/bennu-reference-potential-grids.zip" target="_blank">here</a>. The data were computed using the <a href="#GFM_DE_rule">GFM_DE_rule</a> package. The surface potential is shown in the
+<p class="custom">Reference gravitational data (accurate up to the 14th digit) 
+on a Brillouin sphere, a mean sphere and the surface of Bennu are also 
+available.  The data were computed using the <a 
+   href="#GFM_DE_rule">GFM_DE_rule</a> package. The surface potential is shown 
+   in the
 <a href="#GFM_DE_rule">GFM_DE_rule</a> section above.</p>
 
 <center><p class="custom"><a href="#Top">Go to top</a></p></center>
