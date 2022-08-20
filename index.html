@@ -582,12 +582,15 @@ almost arbitrarily high degrees.</p>
       associated Legendre functions of the first kind up to high harmonic 
       degrees.</li>
 
-  <li class="custom">Performs discrete FFT by <a href="http://fftw.org/" 
-      target="_blank">FFTW</a>.</li>
-
   <li class="custom">Supports <a href="https://www.openmp.org/" 
       target="_blank">OpenMP</a> parallelization for
       shared-memory architectures.</li>
+
+  <li class="custom">Supports AVX, AVX2 and AVX-512 SIMD CPU instructions to 
+      improve the performance.</li>
+
+  <li class="custom">Performs discrete FFT by <a href="http://fftw.org/" 
+      target="_blank">FFTW</a>.</li>
 </ul>
 
 <p class="custom">The predecessor of CHarm, the SHA_SHS package written in C, 
