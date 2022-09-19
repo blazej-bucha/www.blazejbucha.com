@@ -652,6 +652,16 @@ correctly, has its own brief documentation, but is no longer maintained.</p>
 <h2 class="custom" id="Truncation_coefficients">Molodensky's truncation 
 coefficients for cap-modified spectral gravity forward modelling</h2>
 
+<p class="text_highlight"><b>OVERVIEW</b><br>
+--------<br>
+Name: qnpkj.tar<br>
+Description: Molodensky's truncation coefficients for cap integration in 
+spectral gravity forward modelling<br>
+Download coefficients: <a href="https://doi.org/10.5281/zenodo.7092048" 
+    target="_blank">https://doi.org/10.5281/zenodo.7092048</a>
+Download source code: <a href="https://github.com/blazej-bucha/sgfm-qnpkj" 
+    target="_blank">https://github.com/blazej-bucha/sgfm-qnpkj</a></p>
+
 <p class="custom"><a 
 href="https://link.springer.com/article/10.1007/s00190-018-1139-x" 
 target="_blank">Cap-modified spectral gravity forward modelling</a> is 
@@ -664,17 +674,15 @@ number of significant digits from 16 (double precision) to, say, 64 or even
 256. Here, this was achieved using the MATLAB's <a 
 href="https://www.advanpix.com/" target="_blank">ADVANPIX</a> toolbox.</p>
 
-<p class="custom">MATLAB-based routines to compute the truncation coefficients 
-and their radial and horizontal derivatives (require the ADVANPIX toolbox) can 
-be downloaded <a href="truncation_coefficients_code/Qnpkj_code.zip" 
-                 target="_blank">here</a>.
+<p class="custom">MATLAB routines to compute the truncation coefficients and 
+their radial and horizontal derivatives are also available from the link above.  
+The ADVANPIX toolbox is required to run the codes.
 </p>
 
-<p class="custom">Some pre-computed ready-to-use values of the near-zone and 
-far-zone truncation coefficients that were computed within the Bucha et 
-al. study (see below) are available <a 
-   href="truncation_coefficients_pre-computed_values/Qnpkj_pre-computed_values.zip" 
-   target="_blank">here</a> (~2.5 GB). The coefficients are evaluated for
+<p class="custom">Available are also some pre-computed ready-to-use near-zone 
+and far-zone truncation coefficients from the <a 
+   href="https://doi.org/10.1007/s00190-019-01277-3" target="_blank">Bucha et 
+   al. (2019)</a> study.  The coefficients are evaluated for
 <ul>
 <li class="custom">the spherical distance of $\psi_0 = 100000\ \mathrm{m}\ /\ 
 6378137\ \mathrm{m}$ (100 km integration radius from the evaluation 
@@ -689,12 +697,12 @@ point),</li>
 <li class="custom">the first- and second-order horizontal derivatives.</li>
 </ul>
 </p>
-<p class="custom">The coefficients were computed using 256 significant digits, 
-ensuring 24-digit accuracy or better. After the evaluation, the coefficients 
-were converted to double precision with 16 significant digits. Importantly, in 
-some cases, the loss of significance errors may be encountered during the 
-spherical harmonic synthesis when using the coefficients (see the reference 
-below).</p>
+<p class="custom">256 significant digits were used to compute the truncation 
+coefficients, ensuring 24-digit accuracy or better. After the evaluation, the 
+coefficients were converted to double precision with 16 significant 
+digits. Importantly, in some cases, the loss of significance errors may be 
+encountered during the spherical harmonic synthesis when using the coefficients 
+(see the reference below).</p>
 
 
 <p class="custom">Please use the following reference when using either the 
