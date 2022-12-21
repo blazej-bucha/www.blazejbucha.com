@@ -621,7 +621,8 @@ Documentation: <a href="https://blazej-bucha.github.io/charm/index.html"
 target="_blank">https://blazej-bucha.github.io/charm/index.html</a></p>
 
 <p class="custom">CHarm is a C library to work with spherical harmonics up to 
-almost arbitrarily high degrees.</p>
+almost arbitrarily high degrees.  The library is accompanied by a Python 
+wrapper called PyHarm.</p>
 
 <p class="custom"><b>Features</b>
 
@@ -667,6 +668,11 @@ almost arbitrarily high degrees.</p>
 
   <li class="custom">Performs discrete FFT by <a href="http://fftw.org/" 
       target="_blank">FFTW</a>.</li>
+
+  <li class="custom">Ships with a Python wrapper to enable high-level 
+      programming while retaining the efficiency of the C language.  The 
+      wrapper, called PyHarm, wraps CHarm using ctypes and is fully integrated 
+      with NumPy.</li>
 </ul>
 
 <p class="custom">The predecessor of CHarm, the SHA_SHS package written in C, 
